@@ -1,18 +1,23 @@
 import React from 'react'
 import {BrowserRouter, Route, Switch} from 'react-router-dom'
 import { Home } from './components/Home/Home'
-import { NavBar } from './components/NavBar/NavBar'
+import { HomeNavBar } from './components/NavBar/NavBar'
+import { Rate } from './components/Rate/Rate'
 
 function App() {
   return (
     <BrowserRouter>
-      <NavBar />
+    <div>
+      <HomeNavBar />
       <Switch>
-        <Route path='/' component={Home}/>
-        <Route path='/search'/>
+        <Route exact path='/' component={Home}/>
+        <Route path='/rate' component={Rate}/>
       </Switch>
+    </div>
     </BrowserRouter>
   );
 }
+
+// Turn App into class (state-based implementation?)
 
 export default App;

@@ -1,9 +1,9 @@
 import React from 'react'
 
-export function Home() {
+export function Rate() {
     return(
         <div>
-            This is our app!
+            Rating form in construction!
         </div>
     );
 }
