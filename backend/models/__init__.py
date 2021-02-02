@@ -13,7 +13,7 @@ USERNAME = os.environ.get('POSTGRES_USER')
 PASS = os.environ.get('POSTGRES_PASS')
 
 # LOCAL POSTGRES DB URI WITH 'foodecisive' BEING THE DB NAME. REQUIRES POSTGRES SETUP.  
-LOCAL_DB_URL = 'postgresql://{USERNAME}}:{PASS}}@localhost/foodecisive_db'
+LOCAL_DB_URL = f'postgresql://{USERNAME}:{PASS}@localhost/foodecisive_db'
 PROD_DB_URL = ''
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
