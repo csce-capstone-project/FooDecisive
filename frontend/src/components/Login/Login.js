@@ -1,11 +1,18 @@
+  
 import React, { useState } from 'react'
+import {Redirect} from 'react-router'
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import './Login.css'
+import { useHistory } from "react-router-dom";
 
-export function Login() {
+
+
+export function Login(props) {
   const [user, setUser] = useState("");
   const [pass, setPass] = useState("");
+  const [userActive, setActive] = useState(false);
+  const history = useHistory();
 
 
   function validate(){
@@ -13,10 +20,33 @@ export function Login() {
   }
 
   function handleSubmit(event){
-    console.log(user);
-    console.log(pass);
+
+    fetch('/api/login', {
+    method: 'POST',
+    headers: {
+        'Accept': 'application/json; charset=UTF-8',
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+        username: user,
+        password: pass,
+    })
+    }).then(res => res.json())
+      .then(mess => setActive(mess['user']))
+
+
+      history.push('/')
+
+
+
+
+    // setUser('');
+    // setPass('');
+
     event.preventDefault();
+
   }
+
 
   return(
     <div className="Login">
