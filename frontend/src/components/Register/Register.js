@@ -1,12 +1,16 @@
 import React, { useState } from 'react'
+import { Route, Redirect } from 'react-router'
+import { useHistory } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import './Register.css'
+import { Home } from '../Home/Home'
 
 export function Register() {
   const [user, setUser] = useState("");
   const [pass, setPass] = useState("");
-
+  // const [userActive, setActive] = useState(false);
+  const history = useHistory();
 
   function validate(){
     return user.length > 0 && pass.length > 0;
@@ -26,11 +30,13 @@ export function Register() {
     })
     }).then(res => res.json())
       .then(mess => console.log(mess))
+      .then(history.push('/login'))
 
-    setUser('');
-    setPass('');
+    // setUser('');
+    // setPass('');
 
     event.preventDefault();
+
   }
 
   return(

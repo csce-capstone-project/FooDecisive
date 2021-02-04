@@ -19,6 +19,7 @@ import random
 import uuid
 from functools import wraps
 import os
+from datetime import timedelta
 
 # App and DB initialized in __init__.py 
 import models
@@ -104,14 +105,50 @@ def register():
             session['username'] = user.username
             # REFACTOR TO USE THIS 'user_id' when ratings are created
             session['user_id'] = user_id(session.get('username'))
+            session['logged_in'] = True
 
-            return {'201': 'SUCCESS'}
+            return {'status': 'success'}
         else:
-            return {'201': 'FAIL'}
+            return {'status': 'fail'}
     else:
-        return {'201': 'FAIL'}
+        return {'status': 'fail'}
 
 
+
+# login page
+@app.route('/api/login', methods=["GET", "POST"])
+def sign_in():
+    if request.method == 'POST':
+        # username_entered = request.form['username']
+        # password_entered = request.form['password']
+        request_data = json.loads(request.data)
+        print(request_data['username'])
+
+        username_entered = request_data['username']
+        password_entered = request_data['password']
+
+        user = db.session.query(User).filter(User.username == username_entered).first()
+        if user is not None and check_password_hash(user.password_hash, password_entered):
+            session['username'] = user.username
+            session['user_id'] = user_id(session.get('username'))
+            session['logged_in'] = True
+            return jsonify({'loggedIn': True})
+        return {'loggedIn': False}
+    else:
+        return {'loggedIn': False}
+
+
+# sign-out page
+@app.route('/api/logout', methods=["GET", "POST"])
+def sign_out():
+    if session.get('username') is not None:
+        if request.method == 'POST':
+            session.pop('username', None)
+            return {'loggedIn': False}
+        else:
+            return {'loggedIn': False}
+    else:
+        return {'loggedIn': False}
 
 
 
@@ -120,6 +157,7 @@ def register():
 
 if __name__ == '__main__':
     app.debug = True
+    # app.permanent_session_lifetime = timedelta(minutes=1)
     app.run()
 
 
