@@ -5,6 +5,7 @@ import { HomeNavBar } from './components/NavBar/NavBar'
 import { Rate } from './components/Rate/Rate'
 import { Login } from './components/Login/Login'
 import { Search } from './components/BigSearchBar/Search'
+import { Register } from './components/Register/Register'
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <HomeNavBar />
       <Switch>
         <Route exact path='/' component={Home}/>
+        <Route exact path='/register' component={Register}/>
         <Route path='/rate' component={Rate}/>
         <Route path='/login' component={Login}/>
         <Route path='/search' component={Search}/>
