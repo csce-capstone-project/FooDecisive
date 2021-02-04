@@ -1,5 +1,5 @@
 import React from 'react'
-import { Navbar, Nav, NavDropdown} from 'react-bootstrap';
+import { Navbar, Nav, NavDropdown, Button} from 'react-bootstrap';
 
 export function HomeNavBar() {
       return (
@@ -13,8 +13,8 @@ export function HomeNavBar() {
                   <Nav.Link href="/favs">Favorites</Nav.Link>
                   <Nav.Link href="/bot">Talk to a Bot!</Nav.Link>
                 </Nav>
-                <Nav.Link href="/login" style={{ color: '#FFF'}}>Login</Nav.Link>
-                <Nav.Link href="/register" style={{ color: '#FFF' }}>Register</Nav.Link>
+                <Button href="/login" style={{ color: '#FFF', margin:'10px'}}>Login</Button>
+                <Button href="/register" style={{ color: '#FFF' }}>Register</Button>
             </Navbar.Collapse>
         </Navbar>
       );
