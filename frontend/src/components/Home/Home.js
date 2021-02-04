@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import { BigSearchBar } from '../BigSearchBar/BigSearchBar'
 import { Typography, Paper, Grid } from '@material-ui/core';
+import { UsernameContext } from '../../App';
+
 
 const useStyles = makeStyles((theme) => ({
     about: {
@@ -18,12 +20,15 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export function Home() {
+export function Home(props) {
     const classes = useStyles();
     const [currentMessage, setMessage] = useState(0);
+    const [username, setUser] = useState(""); 
+    const { user } = props.location;
 
     // Basically like the old componentDidMount method. Like a constructor.
     useEffect(() => {
+        setUser(JSON.parse(localStorage.getItem('all_users')))
         fetch('/test').then(res => res.json()).then(data => {
           setMessage(data.message);
         });
@@ -34,9 +39,15 @@ export function Home() {
             <header className="App-header">
                 <p>{currentMessage}</p>
             </header>
-            <Typography variant="h2" align="center" gutterBottom>
-              Welcome to FooDecisive!
-            </Typography>
+            {username ? 
+                <Typography variant="h2" align="center" gutterBottom>
+                Welcome to FooDecisive {username}!
+                </Typography> : 
+                <Typography variant="h2" align="center" gutterBottom>
+                not found
+                </Typography>}
+            
+
             <BigSearchBar/>
             <Paper className={classes.about}>
                 <Grid container>
