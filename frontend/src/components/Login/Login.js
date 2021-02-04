@@ -1,16 +1,18 @@
 import React, { useState } from 'react'
-import { Route, Redirect } from 'react-router'
-import { useHistory } from "react-router-dom";
+import {Redirect} from 'react-router'
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import './Register.css'
-import { Home } from '../Home/Home'
+import './Login.css'
+import { useHistory } from "react-router-dom";
 
-export function Register() {
+
+
+export function Login(props) {
   const [user, setUser] = useState("");
   const [pass, setPass] = useState("");
-  // const [userActive, setActive] = useState(false);
+  const [userActive, setActive] = useState(false);
   const history = useHistory();
+
 
   function validate(){
     return user.length > 0 && pass.length > 0;
@@ -18,7 +20,7 @@ export function Register() {
 
   function handleSubmit(event){
 
-    fetch('/api/register', {
+    fetch('/api/login', {
     method: 'POST',
     headers: {
         'Accept': 'application/json; charset=UTF-8',
@@ -29,8 +31,13 @@ export function Register() {
         password: pass,
     })
     }).then(res => res.json())
-      .then(mess => console.log(mess))
-      .then(history.push('/login'))
+      .then(mess => setActive(mess['user']))
+
+
+      history.push('/')
+
+
+
 
     // setUser('');
     // setPass('');
@@ -39,12 +46,13 @@ export function Register() {
 
   }
 
+
   return(
     <div className="Login">
       <Form onSubmit={handleSubmit}>
           <Form.Group controlId="user">
             <Form.Label>Username</Form.Label>
-            <Form.Control autoFocus type="text" value={user} onChange={(e) => setUser(e.target.value)} />
+            <Form.Control autofocus type="text" value={user} onChange={(e) => setUser(e.target.value)} />
           </Form.Group>
           <Form.Group controlId="pass">
             <Form.Label>Password</Form.Label>
