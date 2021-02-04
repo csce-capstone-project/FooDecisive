@@ -24,11 +24,11 @@ export function Home(props) {
     const classes = useStyles();
     const [currentMessage, setMessage] = useState(0);
     const [username, setUser] = useState(""); 
-    const { user } = props;
+    const { user } = props.location;
 
     // Basically like the old componentDidMount method. Like a constructor.
     useEffect(() => {
-        setUser(user);
+        setUser(JSON.parse(localStorage.getItem('all_users')))
         fetch('/test').then(res => res.json()).then(data => {
           setMessage(data.message);
         });
@@ -39,15 +39,14 @@ export function Home(props) {
             <header className="App-header">
                 <p>{currentMessage}</p>
             </header>
-            <UsernameContext.Consumer>
-            {(username) => {
-                return(
-                    <Typography variant="h2" align="center" gutterBottom>
-                    Welcome to FooDecisive {username}!
-                    </Typography>)
-                }
-            }
-            </UsernameContext.Consumer>
+            {username ? 
+                <Typography variant="h2" align="center" gutterBottom>
+                Welcome to FooDecisive {username}!
+                </Typography> : 
+                <Typography variant="h2" align="center" gutterBottom>
+                not found
+                </Typography>}
+            
 
             <BigSearchBar/>
             <Paper className={classes.about}>

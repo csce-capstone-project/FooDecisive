@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import {BrowserRouter, Route, Switch} from 'react-router-dom'
 import { Home } from './components/Home/Home'
 import { HomeNavBar } from './components/NavBar/NavBar'
+import {NavBarLoggedIn} from './components/NavBar/NavBarLoggedIn'
 import { Rate } from './components/Rate/Rate'
 import { Register } from './components/Register/Register'
 import { Login } from './components/Login/Login'
@@ -20,8 +21,12 @@ function App() {
   return (
     <BrowserRouter>
     <div>
-      <HomeNavBar />
+    <HomeNavBar />
       <Switch>
+      {/* {localStorage.getItem('all_users') ?
+        <NavBarLoggedIn /> :
+        <HomeNavBar />
+      } */}
         <Route exact path='/' component={Home}/>
         <Route exact path='/register' component={Register}/>
         <Route path='/rate' component={Rate}/>

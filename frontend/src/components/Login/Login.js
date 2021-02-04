@@ -33,10 +33,15 @@ export function Login(props) {
     }).then(res => res.json())
       .then(mess => setActive(mess['user']))
 
+      localStorage.setItem('all_users',JSON.stringify(user));
 
       history.push('/')
+      // props.history.push({ 
+      //   pathname: '/',
+      //   user: user
+      //  });
 
-
+      window.location.reload();
 
 
     // setUser('');
