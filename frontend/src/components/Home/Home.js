@@ -3,6 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import { BigSearchBar } from '../BigSearchBar/BigSearchBar'
 import { Typography, Paper, Grid } from '@material-ui/core';
 import { UsernameContext } from '../../App';
+import {login, authFetch, useAuth, logout} from "../../services/authentication"
+import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -20,31 +22,50 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export function Home(props) {
+
+export function Home() {
     const classes = useStyles();
-    const [currentMessage, setMessage] = useState(0);
-    const [username, setUser] = useState(""); 
-    const { user } = props.location;
+    const [currentMessage, setMessage] = useState();
+    const [username, setUser] = useState("");
+    const [logged] = useAuth();
+ 
+    // const { user } = props.location;
 
     // Basically like the old componentDidMount method. Like a constructor.
+    // useEffect(() => {
+    //     // setUser(JSON.parse(localStorage.getItem('all_users')))
+    //     // fetch('/test').then(res => res.json()).then(data => {
+    //     //   setMessage(data.message);
+    //     // });
+
+    //   }, []);
+
+    // NOTE: autoFetch() uses Bearer token authorization. It's a macro for fetch().
     useEffect(() => {
-        setUser(JSON.parse(localStorage.getItem('all_users')))
-        fetch('/test').then(res => res.json()).then(data => {
-          setMessage(data.message);
-        });
-      }, []);
+        authFetch("/api/protected").then(response => {
+          if (response.status === 401){
+            setUser("Sorry you aren't authorized!")
+            return null
+          }
+          return response.json()
+        }).then(response => {
+          if (response && response.message){
+            setUser(response.message)
+          }
+        })
+      }, [])
 
     return(
         <div className="App" src="../../restaurant.jpg">
             <header className="App-header">
                 <p>{currentMessage}</p>
             </header>
-            {username ? 
+            {logged ? 
                 <Typography variant="h2" align="center" gutterBottom>
                 Welcome to FooDecisive {username}!
                 </Typography> : 
                 <Typography variant="h2" align="center" gutterBottom>
-                not found
+                Welcome to FooDecisive
                 </Typography>}
             
 

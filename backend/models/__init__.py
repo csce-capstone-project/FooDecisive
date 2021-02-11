@@ -9,7 +9,9 @@ env_path = Path('..') / '.env'
 load_dotenv(dotenv_path=env_path)
 
 app = Flask(__name__)
-CORS(app)
+# CORS(app)
+cors = CORS()
+
 
 # SET CONSTANTS AND DB CONFIG
 ENV = 'dev'
@@ -35,6 +37,10 @@ else:
 # AUXILARY VARIABLES
 app.config['SECRET_KEY'] = SECRET_KEY
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['JWT_ACCESS_LIFESPAN'] = {'hours': 24}
+app.config['JWT_REFRESH_LIFESPAN'] = {'days': 30}
 
 # INITIALIZE DATABASE OBJECT
 db = SQLAlchemy(app)
+
+cors.init_app(app)
