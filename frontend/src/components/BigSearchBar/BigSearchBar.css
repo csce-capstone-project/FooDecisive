@@ -1,0 +1,16 @@
+.root {
+    padding: 5px 4px;
+    display: flex;
+    width: 50%;
+    margin: auto;
+}
+.input {
+    flex: 1;
+}
+.iconButton {
+    padding: 10
+}
+.divider {
+    height: 28;
+    margin: 4;
+}
