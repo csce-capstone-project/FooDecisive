@@ -40,15 +40,16 @@ export function Register() {
   }
 
   return(
-    <div className="Login">
+    <div className="Register">
+      <h2 className="log">Register</h2>
       <Form onSubmit={handleSubmit}>
           <Form.Group controlId="user">
             <Form.Label>Username</Form.Label>
-            <Form.Control autoFocus type="text" value={user} onChange={(e) => setUser(e.target.value)} />
+            <Form.Control autoFocus type="text" placeholder="Username" value={user} onChange={(e) => setUser(e.target.value)} />
           </Form.Group>
           <Form.Group controlId="pass">
             <Form.Label>Password</Form.Label>
-            <Form.Control type="password" value={pass} onChange={(e) => setPass(e.target.value)} />
+            <Form.Control type="password" placeholder="Password" value={pass} onChange={(e) => setPass(e.target.value)} />
           </Form.Group>
           <Button type="submit" disabled={!validate()}>
             Submit
