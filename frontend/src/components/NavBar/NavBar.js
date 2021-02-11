@@ -18,6 +18,9 @@ export function HomeNavBar() {
             <li>
               <Link className="link" to="/">Home</Link>
             </li>
+            <li>
+              <Link className="link" to="/search">Search</Link>
+            </li>
 
             {logged ? 
             <div className="topnav-logged">

@@ -69,7 +69,7 @@ export function Home() {
                 </Typography>}
             
 
-            <BigSearchBar/>
+            {/* <BigSearchBar/> */}
             <Paper className={classes.about}>
                 <Grid container>
                     <Grid item xs={12} sm container>

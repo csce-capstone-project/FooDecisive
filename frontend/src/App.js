@@ -9,6 +9,7 @@ import { Register } from './components/Register/Register'
 import {login, authFetch, useAuth, logout} from "./services/authentication"
 export const UsernameContext = React.createContext('');
 
+export const UsernameContext = React.createContext('');
 
 
 // const PrivateRoute = ({ component: Component, ...rest }) => {
@@ -31,6 +32,9 @@ export default function App() {
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
+        <Route path="/search">
+          <Search />
+        </Route>
           <Route path="/recs">
 
           </Route>
