@@ -30,11 +30,7 @@ export function Search() {
     const classes = useStyles();
     return(
         <div className="App" src="../../restaurant.jpg">
-                <Typography variant="h2" align="center" gutterBottom>
-                Welcome to Search!
-                </Typography>
             
-
             <BigSearchBar/>
         </div>
     );
