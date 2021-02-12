@@ -1,0 +1,31 @@
+.links{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+  }
+  
+  li .link{
+    float: left;
+  }
+  
+  li .link{
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  li .link:hover {
+    background-color: #111;
+  }
+  
+  #log {
+    float: right;
+  }
+
+  #reg {
+      float: right;
+  }

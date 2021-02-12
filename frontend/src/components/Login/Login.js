@@ -1,72 +1,75 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {Redirect} from 'react-router'
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import './Login.css'
 import { useHistory } from "react-router-dom";
+import {login, useAuth} from "../../services/authentication"
 
 
 
-export function Login(props) {
-  const [user, setUser] = useState("");
-  const [pass, setPass] = useState("");
-  const [userActive, setActive] = useState(false);
-  const history = useHistory();
-
+export function Login() {
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  // const history = useHistory();
+  const [logged] = useAuth();
 
   function validate(){
-    return user.length > 0 && pass.length > 0;
+    return username.length > 0 && password.length > 0;
   }
 
-  function handleSubmit(event){
-
+  const onSubmitClick = (e)=>{
+    e.preventDefault()
+    console.log("You pressed login")
+    let opts = {
+      'username': username,
+      'password': password
+    }
+    console.log(opts)
     fetch('/api/login', {
-    method: 'POST',
-    headers: {
-        'Accept': 'application/json; charset=UTF-8',
-        'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-        username: user,
-        password: pass,
-    })
-    }).then(res => res.json())
-      .then(mess => setActive(mess['user']))
+      method: 'post',
+      body: JSON.stringify(opts)
+    }).then(r => r.json())
+      .then(token => {
+        if (token.access_token){
+          login(token)
+          console.log(token)          
+        }
+        else {
+          console.log("Please type in correct username/password")
+        }
+      })
 
-      localStorage.setItem('all_users',JSON.stringify(user));
-
-      history.push('/')
-      // props.history.push({ 
-      //   pathname: '/',
-      //   user: user
-      //  });
-
-      window.location.reload();
-
-
-    // setUser('');
-    // setPass('');
-
-    event.preventDefault();
-
+      
   }
 
+  const handleUsernameChange = (e) => {
+    setUsername(e.target.value)
+  }
 
-  return(
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value)
+  }
+
+  return (
     <div className="Login">
-      <Form onSubmit={handleSubmit}>
+      {!logged ? <div>
+      <h2 className="log">Login</h2>
+      <Form onSubmit={onSubmitClick}>
           <Form.Group controlId="user">
             <Form.Label>Username</Form.Label>
-            <Form.Control autofocus type="text" value={user} onChange={(e) => setUser(e.target.value)} />
+            <Form.Control autoFocus type="text" placeholder="Username" value={username} onChange={handleUsernameChange} />
           </Form.Group>
           <Form.Group controlId="pass">
             <Form.Label>Password</Form.Label>
-            <Form.Control type="password" value={pass} onChange={(e) => setPass(e.target.value)} />
+            <Form.Control type="password" placeholder="Password" value={password} onChange={handlePasswordChange} />
           </Form.Group>
           <Button type="submit" disabled={!validate()}>
             Submit
           </Button>
       </Form>
+      </div>:
+      <Redirect to='/'/>}
     </div>
-  );
+  )
 }
