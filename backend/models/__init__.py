@@ -14,7 +14,7 @@ cors = CORS()
 
 
 # SET CONSTANTS AND DB CONFIG
-ENV = 'dev'
+ENV = 'prod'
 
 # CREATE THESE TWO VARIABLES AS ENVIRONMENT VARIABLES ON YOUR MACHINE
 USERNAME = os.getenv('POSTGRES_USER')
@@ -22,9 +22,9 @@ PASS = os.getenv('POSTGRES_PASS')
 
 # LOCAL POSTGRES DB URI WITH 'foodecisive' BEING THE DB NAME. REQUIRES POSTGRES SETUP.  
 LOCAL_DB_URL = f'postgresql://{USERNAME}:{PASS}@localhost/foodecisive_db'
-PROD_DB_URL = ''
-SECRET_KEY = os.environ.get('SECRET_KEY')
-# SECRET_KEY = 'asdfhjnasdkjfn'
+PROD_DB_URL = f'postgresql://postgres:Akadmin135@database-1.c2yb5pjmfzya.us-east-2.rds.amazonaws.com/postgres'
+# SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = 'asdfhjnasdkjfn'
 
 # ENV OR PROD MODES
 if ENV == 'dev':
@@ -32,7 +32,7 @@ if ENV == 'dev':
     app.config['SQLALCHEMY_DATABASE_URI'] = LOCAL_DB_URL
 else:
     app.debug = False
-    # app.config['SQLALCHEMY_DATABASE_URI'] = ''
+    app.config['SQLALCHEMY_DATABASE_URI'] = PROD_DB_URL
 
 # AUXILARY VARIABLES
 app.config['SECRET_KEY'] = SECRET_KEY

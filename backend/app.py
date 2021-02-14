@@ -209,6 +209,6 @@ def sign_out():
 if __name__ == '__main__':
     app.debug = True
     # app.permanent_session_lifetime = timedelta(minutes=1)
-    app.run(host='0.0.0.0', port=5000)
+    app.run()
 
 
