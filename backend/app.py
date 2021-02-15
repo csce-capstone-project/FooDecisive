@@ -91,7 +91,7 @@ def getMessage():
 
 
 # registration endpoint
-@app.route('/api/register', methods=["GET", "POST"])
+@app.route('/register', methods=["GET", "POST"])
 def register():
     if request.method == 'POST':
         request_data = json.loads(request.data)
@@ -121,7 +121,7 @@ def register():
 
 
 # login page
-@app.route('/api/login', methods=["GET", "POST"])
+@app.route('/login', methods=["GET", "POST"])
 def sign_in():
     if request.method == 'POST':
         req = request.get_json(force=True)
@@ -152,7 +152,7 @@ def sign_in():
         return {'status': 'NO USER FOUND'}
 
 
-@app.route('/api/refresh', methods=['POST'])
+@app.route('/refresh', methods=['POST'])
 def refresh():
     """
     Refreshes an existing JWT by creating a new one that is a copy of the old
@@ -169,7 +169,7 @@ def refresh():
 
 
 
-@app.route('/api/protected')
+@app.route('/protected')
 @flask_praetorian.auth_required
 def protected():
     """
@@ -183,7 +183,7 @@ def protected():
 
 
 # sign-out page
-@app.route('/api/logout', methods=["GET", "POST"])
+@app.route('/logout', methods=["GET", "POST"])
 def sign_out():
     if session.get('username') is not None:
         if request.method == 'POST':
