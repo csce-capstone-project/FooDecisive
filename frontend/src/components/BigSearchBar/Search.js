@@ -5,8 +5,7 @@ import { Typography, Paper, Grid } from '@material-ui/core';
 import { UsernameContext } from '../../App';
 import {login, authFetch, useAuth, logout} from "../../services/authentication"
 import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom'
-
-
+import { yelpREST } from '../../services/yelp';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -27,6 +26,17 @@ const useStyles = makeStyles((theme) => ({
 
 
 export function Search() {
+    const [results, setResults] = useState([]);
+
+    function searchYelp(term, location, sortBy) {
+        yelpREST('business/search', { params : {
+                term : term
+            }
+        }).then(({ data }) => {
+            console.log(data)
+          })
+    }
+
     const classes = useStyles();
     return(
         <div className="App" src="../../restaurant.jpg">
@@ -35,7 +45,7 @@ export function Search() {
                 </Typography>
             
 
-            <BigSearchBar/>
+            <BigSearchBar searchYelp={searchYelp}/>
         </div>
     );
 }
