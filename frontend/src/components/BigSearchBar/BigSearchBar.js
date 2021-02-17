@@ -8,7 +8,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import './BigSearchBar.css';
 
 
-export function BigSearchBar() {
+export function BigSearchBar(props) {
 
 
     const [term, setTerm] = useState('')
@@ -52,7 +52,7 @@ export function BigSearchBar() {
     }
 
     function handleSearch(e) {
-      this.props.searchYelp(term, location, sortBy);
+      props.searchYelp(term, location, sortBy);
       e.preventDefault();
     }
 
@@ -82,7 +82,7 @@ export function BigSearchBar() {
       </div>
       </div>
         );
-  }
+}
 
 // export function BigSearchBar() {
 //   const classes = useStyles();

@@ -9,8 +9,6 @@ import { Register } from './components/Register/Register'
 import {login, authFetch, useAuth, logout} from "./services/authentication"
 export const UsernameContext = React.createContext('');
 
-export const UsernameContext = React.createContext('');
-
 
 // const PrivateRoute = ({ component: Component, ...rest }) => {
 //   const [logged] = useAuth();
