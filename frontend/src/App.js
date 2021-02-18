@@ -7,7 +7,6 @@ import { Login } from './components/Login/Login'
 import { Search } from './components/BigSearchBar/Search'
 import { Register } from './components/Register/Register'
 import {login, authFetch, useAuth, logout} from "./services/authentication"
-
 export const UsernameContext = React.createContext('');
 
 

@@ -36,6 +36,7 @@ from models.business_detail import BusinessDetail
 guard = flask_praetorian.Praetorian()
 guard.init_app(app, User)
 
+
 # custom functions
 def my_random_string(string_length=22):
     """Returns a random string of length 22 (b/c all yelp id's are this length)"""
@@ -193,6 +194,7 @@ def sign_out():
             return {'loggedIn': False}
     else:
         return {'loggedIn': False}
+
 
 
 # @app.route('/', defaults={'path': ''})
