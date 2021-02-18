@@ -19,7 +19,8 @@
 .SearchBar {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-evenly;
+    /* margin-top: 100px; */
     background-image: url('./background_search_desktop.jpg');
     background-size: cover;
     background-repeat: no-repeat;
