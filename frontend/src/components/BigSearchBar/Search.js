@@ -29,11 +29,13 @@ export function Search() {
     const [results, setResults] = useState([]);
 
     function searchYelp(term, location, sortBy) {
-        yelpREST('business/search', { params : {
-                term : term
+        let endpoint = 'business/search';
+        yelpREST(endpoint, { params : {
+                term : term,
+                location: location
             }
         }).then(({ data }) => {
-            console.log(data)
+            console.log(data);
           })
     }
 
