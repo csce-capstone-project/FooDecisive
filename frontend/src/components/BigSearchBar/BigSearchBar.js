@@ -28,7 +28,7 @@ export function BigSearchBar(props) {
     let sortByOptions = {
         'Best Match': 'best_match',
         'Highly Rated': 'rating',
-        'Nearest': 'distance'
+        'Most Reviewed': 'review_count'
     }
 
     function getSortByClass(sortByOption) {
