@@ -11,6 +11,11 @@ export function HomeNavBar() {
   const history = useHistory();
   const [logged] = useAuth();
 
+    const handleClick = (e) => {
+      logout()
+      history.push('/login')
+    }
+
 
       return (
         <nav className="topnav">
@@ -31,7 +36,7 @@ export function HomeNavBar() {
               <Link className="link" to="/favs">Favorites</Link>
             </li>
             <li>
-              <Link className="link" id="log" onClick={() => logout()}>Logout</Link>
+              <Link className="link" id="log" onClick={() => handleClick()}>Logout</Link>
             </li> 
             </div> :
             <div className="topnav-right">
