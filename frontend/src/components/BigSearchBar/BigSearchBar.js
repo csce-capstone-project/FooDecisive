@@ -26,10 +26,10 @@ export function BigSearchBar(props) {
     const [sortBy, setSortBy] = useState('best_match')
 
 
-    useEffect(() => {
-      const myElement = document.querySelector('#myElement')
-      init(myElement, { showCursor: false, strings: ['Welcome to Search!!', 'Yeah!' ] })
-    }, [])
+    // useEffect(() => {
+    //   const myElement = document.querySelector('#myElement')
+    //   init(myElement, { showCursor: false, strings: ['Welcome to Search!!', 'Yeah!' ] })
+    // }, [])
 
     let sortByOptions = {
         'Best Match': 'best_match',
