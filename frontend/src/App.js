@@ -45,6 +45,8 @@ export default function App() {
           <Route path="/register">
             <Register/>
           </Route>
+          <Route path="/businessid">
+          </Route>
           <Route path="/">
             <Home />
           </Route>
