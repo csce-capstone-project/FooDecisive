@@ -32,6 +32,8 @@ from models.user import User
 from models.review import Reviews
 from models.recs import NewRecs
 from models.business_detail import BusinessDetail
+from models.favorites import Favorites
+
 
 guard = flask_praetorian.Praetorian()
 guard.init_app(app, User)

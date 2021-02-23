@@ -28,8 +28,9 @@ PROD_PASS = os.getenv('PROD_PASS')
 # LOCAL POSTGRES DB URI WITH 'foodecisive' BEING THE DB NAME. REQUIRES POSTGRES SETUP.  
 LOCAL_DB_URL = f'postgresql://{USERNAME}:{PASS}@localhost/foodecisive_db'
 PROD_DB_URL = f'postgresql://{PROD_USER}:{PROD_PASS}@database-1.c2yb5pjmfzya.us-east-2.rds.amazonaws.com/postgres'
-# SECRET_KEY = os.environ.get('SECRET_KEY')
-SECRET_KEY = 'asdfhjnasdkjfn'
+
+SECRET_KEY = os.environ.get('SECRET_KEY')
+
 
 # ENV OR PROD MODES
 if ENV == 'dev':
