@@ -3,6 +3,7 @@ import {Redirect} from 'react-router'
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import './ChatBot.css'
+import { witaiREST } from '../../services/witai';
 
 require('dotenv').config()
 const { REACT_APP_WIT_AI_API_KEY } = process.env;
@@ -21,12 +22,9 @@ export function ChatBot(){
     e.preventDefault()
     console.log("You pressed submit")
     let parameter = encodeURIComponent(query.trim())
-    fetch(`https://api.wit.ai/message?v=20210218&q=${parameter}`,{
-      headers: {
-        Authorization: `Bearer ${API_KEY}`
-      }
-    }).then(response=>response.json())
-    .then(response => console.log(JSON.stringify(response)))
+    witaiREST.chat(parameter).then(response=>{
+      console.log(response);
+    })
   }
 
   const handleQueryChange = (e) => {
