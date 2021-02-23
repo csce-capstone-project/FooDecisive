@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import './Detail.css';
 import Card from '@material-ui/core/Card';
-import { CardActionArea } from '@material-ui/core';
+// import { CardActionArea } from '@material-ui/core';
 import { CardActionArea, DialogContent, Button } from '@material-ui/core';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -15,7 +15,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import Box from '@material-ui/core/Box';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import StarOutlineIcon from '@material-ui/icons/StarOutline';
-import ToggleButton from '@material-ui/lab/ToggleButton';
+// import ToggleButton from '@material-ui/lab/ToggleButton';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
