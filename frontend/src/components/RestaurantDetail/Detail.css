@@ -50,3 +50,7 @@
     font-size: .88rem;
     line-height: 1rem;
   }
+
+.custom-modal-style {
+  width: auto;
+  }
