@@ -79,7 +79,7 @@ export function HomeNavBar() {
               <Link className="link" to="/search">Search</Link>
             </li>
 
-            {logged ? 
+            {logged ?
             <div className="topnav-logged">
             <li>
               <Link className="link" to="/recs">Recommendations</Link>
@@ -87,6 +87,7 @@ export function HomeNavBar() {
             <li>
               <Link className="link" to="/favs">Favorites</Link>
             </li>
+            <li><Link className="link" to="/ChatBot">ChatBot</Link></li>
             <li>
             <div id="log" className={classes.root}>
             <Button aria-controls="simple-menu" aria-haspopup="true" onClick={onClick}>
@@ -105,7 +106,7 @@ export function HomeNavBar() {
                 </Menu>
             </div>
               {/*<Link className="link" id="log" onClick={() => handleClick()}>Logout</Link> */}
-            </li> 
+            </li>
             </div> :
             <div className="topnav-right">
             <li>
@@ -123,4 +124,3 @@ export function HomeNavBar() {
 
 
   }
-
