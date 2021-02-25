@@ -22,7 +22,7 @@ const API_KEY = REACT_APP_YELP_API_KEY
 export const yelpREST = {
 // method used to retrieve search results from Yelp API
     search (term, location, sortBy){
-      return fetch(`https://fathomless-retreat-96098.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=${term}&location=${location}&sort_by=${sortBy}`,
+      return fetch(`https://fathomless-retreat-96098.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=restaurant+${term}&location=${location}&sort_by=${sortBy}`,
       {      
         headers: {
             Authorization: `Bearer ${API_KEY}`,
