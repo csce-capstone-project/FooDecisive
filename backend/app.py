@@ -199,6 +199,36 @@ def sign_out():
 
 
 
+@app.route('/api/rate')
+def post_rate():
+    if session.get('username') is not None:
+        if request.method == 'POST':
+            col_id = customid()
+            reviewid = my_random_string(22)
+            userid = user_id(flask_praetorian.current_user().username)
+            business_id = request.form.get('businessid')
+            rating = request.form['rating']
+            bid = db.session.query(func.max(Reviews.bid)).scalar() + 1
+            username = flask_praetorian.current_user().username
+            text = request.form['review']
+
+            if db.session.query(BusinessDetail).filter(BusinessDetail.business_id == business_id).count() == 0:
+                gr_id = idcounter()
+                grdata = BusinessDetail(bid, business_id)
+                db.session.add(grdata)
+                db.session.commit()
+            else:
+                grfilter = db.session.query(BusinessDetail).filter(BusinessDetail.business_id == business_id).first()
+                gr_id = grfilter.b_id
+
+            data = Reviews(col_id, reviewid, userid, business_id, rating, text, bid, username)
+            db.session.add(data)
+            db.session.commit()
+            return {'Status': 'Success'}
+    else:
+        return {'Status': 'Failed'}
+
+
 # @app.route('/', defaults={'path': ''})
 # @app.route('/<path:path>')
 # def catch_all(path):

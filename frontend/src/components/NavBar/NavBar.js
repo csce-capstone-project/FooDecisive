@@ -79,7 +79,7 @@ export function HomeNavBar() {
               <Link className="link" to="/search">Search</Link>
             </li>
 
-            {logged ? 
+            {logged ?
             <div className="topnav-logged">
             <li>
               <Link className="link" to="/recs">Recommendations</Link>
@@ -106,6 +106,9 @@ export function HomeNavBar() {
             </div>
               {/* <Link className="link" id="log" onClick={() => handleClick()}>Logout</Link> */}
             </li> 
+            <li>
+              <Link className="link" to="/ChatBot">ChatBot</Link>
+            </li>
             </div> :
             <div className="topnav-right">
             <li>
@@ -123,4 +126,3 @@ export function HomeNavBar() {
 
 
   }
-

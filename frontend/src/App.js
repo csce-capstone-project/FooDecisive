@@ -6,6 +6,7 @@ import { Rate } from './components/Rate/Rate'
 import { Login } from './components/Login/Login'
 import { Search } from './components/BigSearchBar/Search'
 import { Register } from './components/Register/Register'
+import { ChatBot } from './components/ChatBot/ChatBot'
 import {login, authFetch, useAuth, logout} from "./services/authentication"
 export const UsernameContext = React.createContext('');
 
@@ -45,7 +46,8 @@ export default function App() {
           <Route path="/register">
             <Register/>
           </Route>
-          <Route path="/businessid">
+          <Route path ="/ChatBot">
+            <ChatBot/>
           </Route>
           <Route path="/">
             <Home />
