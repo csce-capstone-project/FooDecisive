@@ -33,7 +33,8 @@ export function Login() {
       .then(token => {
         if (token.access_token){
           login(token)
-          console.log(token)          
+          console.log(token)
+          localStorage.setItem('user', username)          
         }
         else {
           console.log("Please type in correct username/password")
