@@ -42,6 +42,11 @@ export function Home() {
 
     // NOTE: autoFetch() uses Bearer token authorization. It's a macro for fetch().
     useEffect(() => {
+        fetch("/test").then(res => {
+            return res.json()
+        }).then(res => {
+            console.log(res)
+        })
         authFetch("/api/protected").then(response => {
           if (response.status === 401){
             setUser("Sorry you aren't authorized!")

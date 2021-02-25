@@ -1,4 +1,5 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
+import { init } from 'ityped'
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
@@ -24,6 +25,11 @@ export function BigSearchBar(props) {
     const [location, setLocation] = useState('')
     const [sortBy, setSortBy] = useState('best_match')
 
+
+    // useEffect(() => {
+    //   const myElement = document.querySelector('#myElement')
+    //   init(myElement, { showCursor: false, strings: ['Welcome to Search!!', 'Yeah!' ] })
+    // }, [])
 
     let sortByOptions = {
         'Best Match': 'best_match',

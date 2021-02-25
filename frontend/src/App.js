@@ -49,6 +49,8 @@ export default function App() {
           <Route path ="/ChatBot">
             <ChatBot/>
           </Route>
+          <Route path="/businessid">
+          </Route>
           <Route path="/">
             <Home />
           </Route>
