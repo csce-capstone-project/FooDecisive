@@ -99,7 +99,7 @@ export function Detail(props) {
               </CardContent>
             </CardActionArea>
             <CardActions>
-              <Button size="small" color="primary" >
+              <Button size="small" color="primary" onClick={handleRate}>
                 Rate
               </Button>
               <IconButton>
