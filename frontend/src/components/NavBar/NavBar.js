@@ -104,7 +104,7 @@ export function HomeNavBar() {
                   <MenuItem onClick={() => handleClick()}>Logout</MenuItem>
                 </Menu>
             </div>
-              {/* <Link className="link" id="log" onClick={() => handleClick()}>Logout</Link> */}
+              {/*<Link className="link" id="log" onClick={() => handleClick()}>Logout</Link> */}
             </li> 
             </div> :
             <div className="topnav-right">
