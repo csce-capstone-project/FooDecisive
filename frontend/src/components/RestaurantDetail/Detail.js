@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import './Detail.css';
 import Card from '@material-ui/core/Card';
 // import { CardActionArea } from '@material-ui/core';
@@ -18,6 +18,7 @@ import StarOutlineIcon from '@material-ui/icons/StarOutline';
 // import ToggleButton from '@material-ui/lab/ToggleButton';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+import Form from "react-bootstrap/Form";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,8 +32,11 @@ const useStyles = makeStyles((theme) => ({
 
 export function Detail(props) {
     const [businessID, setBusinessID] = useState('')
+    const [review, setReview] = useState('')
+    const [rate, setRate] = useState('')
 
     const [open, setOpen] = React.useState(false);
+    const [openRate, setOpenRate] = React.useState(false);
     const fullWidth = true;
 
     const classes = useStyles();
@@ -40,20 +44,44 @@ export function Detail(props) {
     const handleOpen = () => {
       setOpen(true);
     };
-  
+
     const handleClose = () => {
       setOpen(false);
+      setOpenRate(false);
     };
 
     const handleRate = () => {
-      //
+      setOpen(false);
+      setOpenRate(true);
+    }
+
+    const handleReviewChange = (e) => {
+      setReview(e.target.value);
+    }
+
+    const handleRateChange = (e) => {
+      setRate(e.target.value);
+    }
+
+    function validate(){
+      return rate.length > 0 && review.length > 0 && review.length < 101;
+    }
+
+    const onSubmitClick = (e) => {
+      e.preventDefault();
+      console.log("You pressed submit");
+      console.log(`Rate: ${rate}`);
+      console.log(`Review: ${review}`);
+      setRate('');
+      setReview('');
+      handleClose();
     }
 
     return (
         <div className='Business'>
           <Card height='100px'>
             <CardActionArea onClick={handleOpen}>
-              <CardMedia 
+              <CardMedia
                 component='img'
                 height='140'
                 src={props.business.imageSrc}
@@ -90,7 +118,7 @@ export function Detail(props) {
             <Box display="flex" alignItems="center">
                 <Box flexGrow={1} >{props.business.name}</Box>
                 <Box>
-                  <Button size="small" color="primary" >
+                  <Button size="small" color="primary" onClick={handleRate}>
                     Rate
                   </Button>
                   <IconButton>
@@ -124,6 +152,61 @@ export function Detail(props) {
               </div>
             </DialogContent>
           </Dialog>
+          <Dialog
+            open={openRate}
+            onClose={handleClose}
+            aria-labelledby="business name"
+            fullWidth={fullWidth}
+            className='custom-modal-style'
+          >
+            <DialogTitle id="simple-dialog-title">
+            <Box display="flex" alignItems="center">
+                <Box flexGrow={1} >{props.business.name}</Box>
+                <Box>
+                  <IconButton onClick={handleClose}>
+                    <CloseIcon />
+                  </IconButton>
+                </Box>
+            </Box>
+            </DialogTitle>
+            <DialogContent>
+              <div className={classes.root}>
+                <Grid container spacing={3}>
+                 <Grid item xs={12}>
+                  <Typography gutterBottom variant="body2" component="p" className={classes.text}>
+                    {props.business.address}, {props.business.city}, {props.business.state} {props.business.zipCode}
+                  </Typography>
+                 </Grid>
+                 <Grid item xs={6}>
+                  <DialogContent>
+                    <Form onSubmit={onSubmitClick}>
+                      <Form.Group controlId="rate">
+                        <Form.Label>Rate</Form.Label>
+                        {['radio'].map((type) =>(
+                          <div key={`inline-${type}`} className="mb-3">
+                            <Form.Check inline value="1" label="1" type={type} name="radio" id={`inline-${type}-1`} onChange={handleRateChange} />
+                            <Form.Check inline value="2" label="2" type={type} name="radio" id={`inline-${type}-2`} onChange={handleRateChange} />
+                            <Form.Check inline value="3" label="3" type={type} name="radio" id={`inline-${type}-3`} onChange={handleRateChange} />
+                            <Form.Check inline value="4" label="4" type={type} name="radio" id={`inline-${type}-4`} onChange={handleRateChange} />
+                            <Form.Check inline value="5" label="5" type={type} name="radio" id={`inline-${type}-5`} onChange={handleRateChange} />
+                          </div>
+                        ))}
+                      </Form.Group>
+                      <Form.Group controlId="review">
+                        <Form.Label>Review</Form.Label>
+                        <Form.Control autoFocus type="text" placeholder="Review (100 characters)" value={review} onChange={handleReviewChange} />
+                      </Form.Group>
+                      <Button type="submit" disabled={!validate()}>
+                        Submit
+                      </Button>
+                    </Form>
+                  </DialogContent>
+                 </Grid>
+                 <Grid item xs={6} justify-content='center'><img src={props.business.imageSrc} height='200px'/></Grid>
+                </Grid>
+              </div>
+            </DialogContent>
+          </Dialog>
         </div>
         // <div className="Business">
         //   <div className="image-container">
@@ -145,4 +228,3 @@ export function Detail(props) {
         // </div>
         );
   }
-
