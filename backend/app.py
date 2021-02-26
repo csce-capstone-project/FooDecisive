@@ -84,6 +84,14 @@ def user_id(userid):
         idquery_old = idquery.userid
         return idquery_old
 
+def idcounter():
+    iding = db.session.query(BusinessDetail).order_by(BusinessDetail.b_id.desc()).first()
+    if not iding:
+        last_id = 0
+    else:
+        last_id = int(iding.b_id)
+    next_id = int(last_id) + 1
+    return next_id
 
 
 # API
@@ -199,18 +207,25 @@ def sign_out():
 
 
 
-@app.route('/api/rate')
+@app.route('/api/rate', methods=["GET", "POST"])
+@flask_praetorian.auth_required
 def post_rate():
-    if session.get('username') is not None:
+    print(flask_praetorian.current_user().username)
+    if flask_praetorian.current_user().username is not None:
         if request.method == 'POST':
+            req = request.get_json(force=True)
+
+
             col_id = customid()
             reviewid = my_random_string(22)
             userid = user_id(flask_praetorian.current_user().username)
-            business_id = request.form.get('businessid')
-            rating = request.form['rating']
+            business_id = req.get('businessid', None)
+            rating = req.get('rating', None)
             bid = db.session.query(func.max(Reviews.bid)).scalar() + 1
             username = flask_praetorian.current_user().username
-            text = request.form['review']
+            text = req.get('review', None)
+
+            # print(f'{rating}, {business_id}, {text}')
 
             if db.session.query(BusinessDetail).filter(BusinessDetail.business_id == business_id).count() == 0:
                 gr_id = idcounter()
@@ -227,16 +242,6 @@ def post_rate():
             return {'Status': 'Success'}
     else:
         return {'Status': 'Failed'}
-
-
-# @app.route('/', defaults={'path': ''})
-# @app.route('/<path:path>')
-# def catch_all(path):
-#     print("Hello from catch all")
-#     if path != "" and os.path.exists(os.path.join('..','build',path)):
-#         return app.send_static_file(path)
-#     else:
-#         return app.send_static_file('index.html')
 
 
 

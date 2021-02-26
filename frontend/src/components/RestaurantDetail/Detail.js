@@ -20,6 +20,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Form from "react-bootstrap/Form";
 
+import {authFetch} from '../../services/authentication'
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -41,8 +43,10 @@ export function Detail(props) {
 
     const classes = useStyles();
 
-    const handleOpen = () => {
+    const handleOpen = (e) => {
       setOpen(true);
+      console.log(props.business.id)
+      setBusinessID(props.business.id)
     };
 
     const handleClose = () => {
@@ -78,14 +82,29 @@ export function Detail(props) {
       console.log("You pressed login")
 
       let opts = {
+        'businessid': businessID,
         'rating': rate,
-        'password': review
+        'review': review
       }
       console.log(opts)
-      fetch('/api/rate', {
+
+      // authFetch("/api/protected").then(response => {
+      //   if (response.status === 401){
+      //     setUser("")
+      //     return null
+      //   }
+      //   return response.json()
+      // }).then(response => {
+      //   if (response && response["message"]){
+      //     setUser(response["message"])
+      //   }
+      // })
+
+      authFetch('/api/rate', {
         method: 'post',
         body: JSON.stringify(opts)
-      }).then(r => console.log(r.json()))
+      }).then(r => r.json())
+      .then(data => console.log(data))
 
 
       handleClose();
@@ -94,7 +113,7 @@ export function Detail(props) {
     return (
         <div className='Business'>
           <Card height='100px'>
-            <CardActionArea onClick={handleOpen}>
+            <CardActionArea onClick={(e) => handleOpen(e)}>
               <CardMedia
                 component='img'
                 height='140'
