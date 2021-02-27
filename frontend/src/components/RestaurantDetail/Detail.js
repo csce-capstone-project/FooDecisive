@@ -14,7 +14,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import Box from '@material-ui/core/Box';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import StarOutlineIcon from '@material-ui/icons/StarOutline';
-// import ToggleButton from '@material-ui/lab/ToggleButton';
+import ToggleButton from '@material-ui/lab/ToggleButton';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import {login, authFetch, useAuth, logout} from "../../services/authentication";
@@ -40,6 +40,8 @@ export function Detail(props) {
     const fullWidth = true;
 
     const [logged] = useAuth();
+    const [username, setUser] = useState("");
+    const [favorite, setFavorite] = useState(false);
 
     const classes = useStyles();
 
@@ -69,6 +71,25 @@ export function Detail(props) {
       return rate.length > 0 && review.length > 0 && review.length < 101;
     }
 
+    useEffect(() => {
+      fetch("/test").then(res => {
+          return res.json()
+      }).then(res => {
+          console.log(res)
+      })
+      authFetch("/api/protected").then(response => {
+        if (response.status === 401){
+          setUser("Sorry you aren't authorized!")
+          return null
+        }
+        return response.json()
+      }).then(response => {
+        if (response && response.message){
+          setUser(response.message)
+        }
+      })
+    }, [])
+
     const onSubmitClick = (e) => {
       e.preventDefault();
       console.log("You pressed submit");
@@ -76,8 +97,36 @@ export function Detail(props) {
       console.log(`Review: ${review}`);
       setRate('');
       setReview('');
+
+      console.log("You pressed login")
+
+      let opts = {
+        'rating': rate,
+        'password': review
+      }
+      console.log(opts)
+      fetch('/api/rate', {
+        method: 'post',
+        body: JSON.stringify(opts)
+      }).then(r => console.log(r.json()))
+
+
       handleClose();
     }
+
+    // const onFavoriteClick = (e) => {
+    //   e.preventDefault();
+    //   console.log('Added to favorites');
+    //   let opts = {
+    //     'business_id': props.business.id,
+    //     'user_id': username
+    //   }
+    //   console.log(opts);
+    //   fetch('/api/favorites', {
+    //     method: 'post',
+    //     body: JSON.stringify(opts)
+    //   }).then(r => console.log(r.json()));
+    // }
 
     return (
         <div className='Business'>
@@ -100,14 +149,18 @@ export function Detail(props) {
                 </Typography>
               </CardContent>
             </CardActionArea>
-            <CardActions>
-              <Button size="small" color="primary" onClick={handleRate}>
-                Rate
-              </Button>
-              <IconButton>
-                <StarOutlineIcon />
-              </IconButton>
-            </CardActions>
+              {logged ?
+              <div>
+                <CardActions>
+                <Button size="small" color="primary" onClick={handleRate}>
+                  Rate
+                </Button>
+                <IconButton>
+                  <StarOutlineIcon />
+                </IconButton>
+                </CardActions>
+              </div>
+              : <div></div>}
           </Card>
           <Dialog
             open={open}
@@ -215,7 +268,6 @@ export function Detail(props) {
               </div>
             </DialogContent>
           </Dialog>
-           : <div></div>}
         </div>
         // <div className="Business">
         //   <div className="image-container">

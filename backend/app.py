@@ -94,7 +94,7 @@ def getMessage():
 
 
 # registration endpoint
-@app.route('/register', methods=["GET", "POST"])
+@app.route('/api/register', methods=["GET", "POST"])
 def register():
     if request.method == 'POST':
         request_data = json.loads(request.data)
@@ -124,7 +124,7 @@ def register():
 
 
 # login page
-@app.route('/login', methods=["GET", "POST"])
+@app.route('/api/login', methods=["GET", "POST"])
 def sign_in():
     if request.method == 'POST':
         req = request.get_json(force=True)
@@ -155,7 +155,7 @@ def sign_in():
         return {'status': 'NO USER FOUND'}
 
 
-@app.route('/refresh', methods=['POST'])
+@app.route('/api/refresh', methods=['POST'])
 def refresh():
     """
     Refreshes an existing JWT by creating a new one that is a copy of the old
@@ -172,7 +172,7 @@ def refresh():
 
 
 
-@app.route('/protected')
+@app.route('/api/protected')
 @flask_praetorian.auth_required
 def protected():
     """
@@ -186,7 +186,7 @@ def protected():
 
 
 # sign-out page
-@app.route('/logout', methods=["GET", "POST"])
+@app.route('/api/logout', methods=["GET", "POST"])
 def sign_out():
     if session.get('username') is not None:
         if request.method == 'POST':
@@ -197,6 +197,41 @@ def sign_out():
     else:
         return {'loggedIn': False}
 
+
+
+@app.route('/api/rate')
+def post_rate():
+    if session.get('username') is not None:
+        if request.method == 'POST':
+            col_id = customid()
+            reviewid = my_random_string(22)
+            userid = user_id(flask_praetorian.current_user().username)
+            business_id = request.form.get('businessid')
+            rating = request.form['rating']
+            bid = db.session.query(func.max(Reviews.bid)).scalar() + 1
+            username = flask_praetorian.current_user().username
+            text = request.form['review']
+
+            if db.session.query(BusinessDetail).filter(BusinessDetail.business_id == business_id).count() == 0:
+                gr_id = idcounter()
+                grdata = BusinessDetail(bid, business_id)
+                db.session.add(grdata)
+                db.session.commit()
+            else:
+                grfilter = db.session.query(BusinessDetail).filter(BusinessDetail.business_id == business_id).first()
+                gr_id = grfilter.b_id
+
+            data = Reviews(col_id, reviewid, userid, business_id, rating, text, bid, username)
+            db.session.add(data)
+            db.session.commit()
+            return {'Status': 'Success'}
+    else:
+        return {'Status': 'Failed'}
+
+# @app.route('/api/favorites', methods=['GET', 'POST'])
+# def favorite():
+#     if request.method == 'POST':
+#         request_data = json.loads(request.data)
 
 
 # @app.route('/', defaults={'path': ''})
@@ -213,6 +248,6 @@ def sign_out():
 if __name__ == '__main__':
     app.debug = True
     # app.permanent_session_lifetime = timedelta(minutes=1)
-    app.run()
+    app.run(host='0.0.0.0', port=5000)
 
 
