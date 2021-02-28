@@ -87,6 +87,7 @@ export function HomeNavBar() {
             <li>
               <Link className="link" to="/favs">Favorites</Link>
             </li>
+            <li><Link className="link" to="/ChatBot">ChatBot</Link></li>
             <li>
             <div id="log" className={classes.root}>
             <Button aria-controls="simple-menu" aria-haspopup="true" onClick={onClick}>
@@ -104,10 +105,7 @@ export function HomeNavBar() {
                   <MenuItem onClick={() => handleClick()}>Logout</MenuItem>
                 </Menu>
             </div>
-              {/* <Link className="link" id="log" onClick={() => handleClick()}>Logout</Link> */}
-            </li> 
-            <li>
-              <Link className="link" to="/ChatBot">ChatBot</Link>
+              {/*<Link className="link" id="log" onClick={() => handleClick()}>Logout</Link> */}
             </li>
             </div> :
             <div className="topnav-right">
