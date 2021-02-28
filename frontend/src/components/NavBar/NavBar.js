@@ -90,7 +90,7 @@ export function HomeNavBar() {
             <li>
             <div id="log" className={classes.root}>
             <Button aria-controls="simple-menu" aria-haspopup="true" onClick={onClick}>
-             <Avatar>{localStorage.getItem('user').toString().toUpperCase()[0]}</Avatar>
+             <Avatar>{String(localStorage.getItem('user'))[0]}</Avatar>
              </Button>
                 <Menu
                   id="simple-menu"
