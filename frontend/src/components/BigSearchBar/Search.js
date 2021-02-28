@@ -6,6 +6,7 @@ import { UsernameContext } from '../../App';
 import {login, authFetch, useAuth, logout} from "../../services/authentication"
 import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom'
 import { yelpREST } from '../../services/yelp';
+import { List } from '../RestaurantDetail/List'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -26,26 +27,29 @@ const useStyles = makeStyles((theme) => ({
 
 
 export function Search() {
+    
     const [results, setResults] = useState([]);
 
     function searchYelp(term, location, sortBy) {
-        yelpREST('business/search', { params : {
-                term : term
-            }
-        }).then(({ data }) => {
-            console.log(data)
+        yelpREST.search(term, location, sortBy).then(businesses => {
+            console.log(businesses)
+            setResults(businesses)
           })
+        // yelpREST('business/search', { params : {
+        //         term : term
+        //     }
+        // }).then(({ data }) => {
+        //     console.log(data)
+        //   })
     }
+
+    
 
     const classes = useStyles();
     return(
         <div className="App" src="../../restaurant.jpg">
-                <Typography variant="h2" align="center" gutterBottom>
-                Welcome to Search!
-                </Typography>
-            
-
             <BigSearchBar searchYelp={searchYelp}/>
+            <List businesses={results}/>
         </div>
     );
 }

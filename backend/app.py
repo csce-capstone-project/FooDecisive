@@ -32,9 +32,12 @@ from models.user import User
 from models.review import Reviews
 from models.recs import NewRecs
 from models.business_detail import BusinessDetail
+from models.favorites import Favorites
+
 
 guard = flask_praetorian.Praetorian()
 guard.init_app(app, User)
+
 
 # custom functions
 def my_random_string(string_length=22):
@@ -81,6 +84,14 @@ def user_id(userid):
         idquery_old = idquery.userid
         return idquery_old
 
+def idcounter():
+    iding = db.session.query(BusinessDetail).order_by(BusinessDetail.b_id.desc()).first()
+    if not iding:
+        last_id = 0
+    else:
+        last_id = int(iding.b_id)
+    next_id = int(last_id) + 1
+    return next_id
 
 
 # API
@@ -195,14 +206,42 @@ def sign_out():
         return {'loggedIn': False}
 
 
-# @app.route('/', defaults={'path': ''})
-# @app.route('/<path:path>')
-# def catch_all(path):
-#     print("Hello from catch all")
-#     if path != "" and os.path.exists(os.path.join('..','build',path)):
-#         return app.send_static_file(path)
-#     else:
-#         return app.send_static_file('index.html')
+
+@app.route('/api/rate', methods=["GET", "POST"])
+@flask_praetorian.auth_required
+def post_rate():
+    print(flask_praetorian.current_user().username)
+    if flask_praetorian.current_user().username is not None:
+        if request.method == 'POST':
+            req = request.get_json(force=True)
+
+
+            col_id = customid()
+            reviewid = my_random_string(22)
+            userid = user_id(flask_praetorian.current_user().username)
+            business_id = req.get('businessid', None)
+            rating = req.get('rating', None)
+            bid = db.session.query(func.max(Reviews.bid)).scalar() + 1
+            username = flask_praetorian.current_user().username
+            text = req.get('review', None)
+
+            # print(f'{rating}, {business_id}, {text}')
+
+            if db.session.query(BusinessDetail).filter(BusinessDetail.business_id == business_id).count() == 0:
+                gr_id = idcounter()
+                grdata = BusinessDetail(bid, business_id)
+                db.session.add(grdata)
+                db.session.commit()
+            else:
+                grfilter = db.session.query(BusinessDetail).filter(BusinessDetail.business_id == business_id).first()
+                gr_id = grfilter.b_id
+
+            data = Reviews(col_id, reviewid, userid, business_id, rating, text, bid, username)
+            db.session.add(data)
+            db.session.commit()
+            return {'Status': 'Success'}
+    else:
+        return {'Status': 'Failed'}
 
 
 
