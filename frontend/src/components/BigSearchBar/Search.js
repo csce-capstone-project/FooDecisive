@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import { BigSearchBar } from '../BigSearchBar/BigSearchBar'
-import { Typography, Paper, Grid } from '@material-ui/core';
-import { UsernameContext } from '../../App';
-import {login, authFetch, useAuth, logout} from "../../services/authentication"
-import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom'
 import { yelpREST } from '../../services/yelp';
 import { List } from '../RestaurantDetail/List'
 

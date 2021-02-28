@@ -1,11 +1,7 @@
 import React, {useState, useEffect} from 'react'
-import { init } from 'ityped'
-import { makeStyles, withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import InputBase from '@material-ui/core/InputBase';
-import IconButton from '@material-ui/core/IconButton';
-import SearchIcon from '@material-ui/icons/Search';
+import { withStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
+import Button from "react-bootstrap/Button";
 
 import './BigSearchBar.css';
 
@@ -62,6 +58,10 @@ export function BigSearchBar(props) {
       e.preventDefault();
     }
 
+    function validate() {
+      return term.length > 0 && location.length > 0;
+    }
+
 
 
   const renderSortByOptions = () => {
@@ -87,7 +87,7 @@ export function BigSearchBar(props) {
         <input placeholder="Near" onChange={handleLocationChange}/>
       </div>
       <div className="SearchBar-submit">
-        <a onClick={handleSearch}>Search</a>
+        <Button onClick={handleSearch} disabled={!validate()}>Search</Button>
       </div>
       </div>
         );
