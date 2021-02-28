@@ -1,25 +1,13 @@
-import React, { useState, useEffect } from 'react'
-import {BrowserRouter as Router, Route, Switch, Redirect, Link} from 'react-router-dom'
+import React from 'react'
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import { Home } from './components/Home/Home'
 import { HomeNavBar } from './components/NavBar/NavBar'
-import { Rate } from './components/Rate/Rate'
 import { Login } from './components/Login/Login'
 import { Search } from './components/BigSearchBar/Search'
 import { Register } from './components/Register/Register'
 import { ChatBot } from './components/ChatBot/ChatBot'
-import {login, authFetch, useAuth, logout} from "./services/authentication"
 export const UsernameContext = React.createContext('');
 
-
-// const PrivateRoute = ({ component: Component, ...rest }) => {
-//   const [logged] = useAuth();
-
-//   return <Route {...rest} render={(props) => (
-//     logged
-//       ? <Component {...props} />
-//       : <Redirect to='/login' />
-//   )} />
-// }
 
 
 export default function App() {

@@ -6,7 +6,6 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
-import { Link } from "react-router-dom";
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import IconButton from '@material-ui/core/IconButton';
@@ -15,12 +14,10 @@ import Box from '@material-ui/core/Box';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import StarIcon from '@material-ui/icons/Star';
-import ToggleButton from '@material-ui/lab/ToggleButton';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import {login, authFetch, useAuth, logout} from "../../services/authentication";
+import {authFetch, useAuth} from "../../services/authentication";
 import Form from "react-bootstrap/Form";
-import { yellow } from '@material-ui/core/colors';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -126,7 +123,7 @@ export function Detail(props) {
 
     const onFavoriteClick = (e) => {
       e.preventDefault();
-      if (favorite == false) {
+      if (favorite === false) {
         let opts = {
           'businessid': props.business.id,
           'addFavorite': 'add'

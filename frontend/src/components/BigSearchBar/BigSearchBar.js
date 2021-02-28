@@ -1,10 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { init } from 'ityped'
-import { makeStyles, withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import InputBase from '@material-ui/core/InputBase';
-import IconButton from '@material-ui/core/IconButton';
-import SearchIcon from '@material-ui/icons/Search';
+import { withStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
 import Button from "react-bootstrap/Button";
 

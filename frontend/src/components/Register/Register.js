@@ -1,10 +1,8 @@
 import React, { useState } from 'react'
-import { Route, Redirect } from 'react-router'
 import { useHistory } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import './Register.css'
-import { Home } from '../Home/Home'
 
 export function Register() {
   const [user, setUser] = useState("");
