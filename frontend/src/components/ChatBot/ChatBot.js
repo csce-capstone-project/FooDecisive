@@ -51,9 +51,6 @@ export function ChatBot(){
         else{
           document.getElementById('searchQuery').innerHTML = ''
         }
-        //intents.forEach(function (item){
-        //  console.log(item)
-        //});
       }
       else{
         document.getElementById("location").innerHTML = ''
