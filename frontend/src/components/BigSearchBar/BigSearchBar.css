@@ -76,6 +76,14 @@
   .SearchBar-fields input:last-child {
     margin-right: 0;
   }
+  .SearchBar-fields button {
+    background-color: white;
+    color: black;
+  }
+  .SearchBar-fields button:hover {
+    background-color: #555555;
+    color: white;
+  }
   
   .SearchBar-submit {
     text-align: center;
