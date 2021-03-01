@@ -52,3 +52,33 @@ export const yelpREST = {
       });
     }
 };
+
+
+
+export const yelpBusID = {
+  // method used to retrieve search results from Yelp API
+      searchByID (id){
+        return fetch(`https://fathomless-retreat-96098.herokuapp.com/https://api.yelp.com/v3/businesses/${id}`,
+        {      
+          headers: {
+              Authorization: `Bearer ${API_KEY}`,
+              'Content-Type': 'application/json'
+          },
+        }).then(response => {
+          return response.json();
+        }).then(business => {
+              return {
+                id: business.id,
+                imageSrc: business.image_url,
+                name: business.name,
+                address: business.location.address1,
+                city: business.location.city,
+                state: business.location.state,
+                zipCode: business.location.zip_code,
+                category: business.categories[0].title,
+                rating: business.rating,
+                reviewCount: business.review_count
+              };
+        });
+      }
+  };
