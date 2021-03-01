@@ -139,34 +139,34 @@ export function Detail(props) {
           body: JSON.stringify(opts)
         }).then(r => r.json())
         .then(data => {
-          // setFavorite(data.favorite)
+          console.log(data)
           console.log("Added to favorites!")
         });
         // setFavorite(true)
       }
       else {
         setFavorite(false)
-        // let opts = {
-        //   'businessid': props.business.id,
-        //   'addFavorite': 'delete'
-        // }
-        // console.log(opts);
-        // authFetch('/api/favorites', {
-        //   method: 'post',
-        //   body: JSON.stringify(opts)
-        // }).then(r => r.json())
-        // .then(data => setFavorite(data.favorite));
+        let opts = {
+          'businessid': props.business.id,
+          'addFavorite': 'delete'
+        }
+        console.log(opts);
+        authFetch('/api/favorites', {
+          method: 'post',
+          body: JSON.stringify(opts)
+        }).then(r => r.json())
+        .then(data => setFavorite(data.favorite));
         
-        // console.log('Deleted from favorites');
+        console.log('Deleted from favorites');
       }  
     }
 
     // Check whether card is already a favorite
-      // useEffect(() => {
-      // authFetch(`/api/get_favorites?business_id=${props.business.id}`)
-      // .then(response => response.json())
-      // .then(data => setFavorite(data.favorite));
-      // }, [])
+      useEffect(() => {
+      authFetch(`/api/favorites?business_id=${props.business.id}`)
+      .then(response => response.json())
+      .then(data => setFavorite(data.favorite));
+      }, [])
 
 
       return (
@@ -196,15 +196,15 @@ export function Detail(props) {
                 <Button size="small" variant="contained" color="secondary" onClick={handleRate}>
                   Rate
                 </Button>
-                <IconButton onClick={onFavoriteClick}>
+                {/* <IconButton onClick={onFavoriteClick}>
                   <AddIcon style={{ color: '#fdd835' }} />
-                </IconButton>
-                {/* {!favorite ? <IconButton onClick={onFavoriteClick}>
+                </IconButton> */}
+                {!favorite ? <IconButton onClick={onFavoriteClick}>
                   <StarBorderIcon style={{ color: '#fdd835' }} />
                 </IconButton>
                 : <IconButton onClick={onFavoriteClick}>
                 <StarIcon style={{ color: '#fdd835' }} />
-                </IconButton>} */}
+                </IconButton>}
                 </CardActions>
               </div>
               : <div></div>}
@@ -224,15 +224,15 @@ export function Detail(props) {
                   <Button size="small" variant="contained" color="secondary" onClick={handleRate}>
                     Rate
                   </Button>
-                  <IconButton onClick={onFavoriteClick}>
+                  {/* <IconButton onClick={onFavoriteClick}>
                   <AddIcon style={{ color: '#fdd835' }} />
-                </IconButton>
-                  {/* {!favorite ? <IconButton onClick={onFavoriteClick}>
+                </IconButton> */}
+                  {!favorite ? <IconButton onClick={onFavoriteClick}>
                     <StarBorderIcon style={{ color: '#fdd835' }} />
                   </IconButton>
                   : <IconButton onClick={onFavoriteClick}>
                   <StarIcon style={{ color: '#fdd835' }} />
-                  </IconButton>} */}
+                  </IconButton>}
                   <IconButton onClick={handleClose}>
                     <CloseIcon />
                   </IconButton>
