@@ -55,6 +55,7 @@ export function Home() {
             setUser(response.message)
           }
         })
+        
       }, [])
 
     return(

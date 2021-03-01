@@ -6,6 +6,7 @@ import { Login } from './components/Login/Login'
 import { Search } from './components/BigSearchBar/Search'
 import { Register } from './components/Register/Register'
 import { ChatBot } from './components/ChatBot/ChatBot'
+import { Favorites } from './components/Favorites/Favorites'
 export const UsernameContext = React.createContext('');
 
 
@@ -19,6 +20,9 @@ export default function App() {
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
+          <Route path="/favs">
+            <Favorites />
+          </Route>
         <Route path="/search">
           <Search />
         </Route>

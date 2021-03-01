@@ -246,59 +246,116 @@ def post_rate():
     else:
         return {'Status': 'Failed'}
 
+
+
+@app.route('/api/get_favorites', methods=['GET', 'POST'])
+@flask_praetorian.auth_required
+def get_favorites():
+    if flask_praetorian.current_user().username is not None:
+        userid = user_id(flask_praetorian.current_user().username)
+
+
+        business_id = request.args.get('business_id')
+
+        if db.session.query(Favorites).filter(Favorites.userid == userid).count() == 0:
+            return json.dumps({
+                'Status': 'Success',
+                'favorite': False
+            })
+        else:
+            businesses = db.session.query(Favorites).filter(Favorites.userid == userid).with_entities(Favorites.business_id).all()
+            print(businesses)
+            return json.dumps({
+                'businesses': businesses
+            })
+
+
+
 @app.route('/api/favorites', methods=['GET', 'POST'])
 @flask_praetorian.auth_required
 def favorite():
-    print(flask_praetorian.current_user().username)
     if flask_praetorian.current_user().username is not None:
         userid = user_id(flask_praetorian.current_user().username)
+
         if request.method == 'POST':
             req = request.get_json(force=True)
 
             business_id = req.get('businessid', None)
+            option = req.get('addFavorite', None)
 
-            if req.get('addFavorite', None) == 'add':
+
+            if option == 'add':
                 if db.session.query(Favorites).filter(Favorites.userid == userid, Favorites.business_id == business_id).count() == 0:
                     data = Favorites(userid, business_id)
                     db.session.add(data)
                     db.session.commit()
-                    return json.dumps({
-                        'Status': 'Success',
-                        'favorite': True
-                    })
+
+                    return {'Status': 'Success'}
                 else:
-                    return json.dumps({
-                        'Status': 'Failed',
-                        'favorite': False
-                    })
+                    return {'Status': 'Failed'}
             else:
                 if db.session.query(Favorites).filter(Favorites.userid == userid, Favorites.business_id == business_id).count() != 0:
                     db.session.delete(db.session.query(Favorites).filter(Favorites.userid == userid, Favorites.business_id == business_id).first())
                     db.session.commit()
-                    return json.dumps({
-                        'Status': 'Success',
-                        'favorite': False
-                    })
+                    return {'Status': 'Success'}
                 else:
-                    return json.dumps({
-                        'Status': 'Failed',
-                        'favorite': True
-                    })
-        else:
-            business_id = request.args.get('business_id')
+                    return {'Status': 'Failed'}
 
-            if db.session.query(Favorites).filter(Favorites.userid == userid, Favorites.business_id == business_id).count() == 0:
-                return json.dumps({
-                    'Status': 'Success',
-                    'favorite': False
-                })
-            else:
-                return json.dumps({
-                    'Status': 'Success',
-                    'favorite': True
-                })
-    else:
-        return {'Status': 'Failed'}
+
+
+# @app.route('/api/favorites', methods=['GET', 'POST'])
+# @flask_praetorian.auth_required
+# def favorite():
+#     print(flask_praetorian.current_user().username)
+#     if flask_praetorian.current_user().username is not None:
+#         userid = user_id(flask_praetorian.current_user().username)
+#         if request.method == 'POST':
+#             req = request.get_json(force=True)
+
+#             business_id = req.get('businessid', None)
+
+#             if req.get('addFavorite', None) == 'add':
+#                 if db.session.query(Favorites).filter(Favorites.userid == userid, Favorites.business_id == business_id).count() == 0:
+#                     data = Favorites(userid, business_id)
+#                     db.session.add(data)
+#                     db.session.commit()
+#                     return json.dumps({
+#                         'Status': 'Success',
+#                         'favorite': True
+#                     })
+#                 else:
+#                     return json.dumps({
+#                         'Status': 'Failed',
+#                         'favorite': False
+#                     })
+#             else:
+#                 if db.session.query(Favorites).filter(Favorites.userid == userid, Favorites.business_id == business_id).count() != 0:
+#                     db.session.delete(db.session.query(Favorites).filter(Favorites.userid == userid, Favorites.business_id == business_id).first())
+#                     db.session.commit()
+#                     return json.dumps({
+#                         'Status': 'Success',
+#                         'favorite': False
+#                     })
+#                 else:
+#                     return json.dumps({
+#                         'Status': 'Failed',
+#                         'favorite': True
+#                     })
+#         else:
+#             business_id = request.args.get('business_id')
+
+#             if db.session.query(Favorites).filter(Favorites.userid == userid, Favorites.business_id == business_id).count() == 0:
+#                 return json.dumps({
+#                     'Status': 'Success',
+#                     'favorite': False
+#                 })
+#             else:
+#                 return json.dumps({
+#                     'Status': 'Success',
+#                     'favorite': True
+#                 })
+#     else:
+#         return {'Status': 'Failed'}
 
 
 

@@ -18,6 +18,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import {authFetch, useAuth} from "../../services/authentication";
 import Form from "react-bootstrap/Form";
+import AddIcon from '@material-ui/icons/Add';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -124,40 +125,49 @@ export function Detail(props) {
     const onFavoriteClick = (e) => {
       e.preventDefault();
       if (favorite === false) {
+        setFavorite(true)
+
         let opts = {
           'businessid': props.business.id,
           'addFavorite': 'add'
         }
         console.log(opts);
+
         authFetch('/api/favorites', {
           method: 'post',
           body: JSON.stringify(opts)
         }).then(r => r.json())
         .then(data => {
-          setFavorite(data.favorite)
+          // setFavorite(data.favorite)
           console.log("Added to favorites!")
         });
+        // setFavorite(true)
       }
       else {
-        let opts = {
-          'businessid': props.business.id,
-          'addFavorite': 'delete'
-        }
-        console.log(opts);
-        authFetch('/api/favorites', {
-          method: 'post',
-          body: JSON.stringify(opts)
-        }).then(r => r.json())
-        .then(data => setFavorite(data.favorite));
+        setFavorite(false)
+        // let opts = {
+        //   'businessid': props.business.id,
+        //   'addFavorite': 'delete'
+        // }
+        // console.log(opts);
+        // authFetch('/api/favorites', {
+        //   method: 'post',
+        //   body: JSON.stringify(opts)
+        // }).then(r => r.json())
+        // .then(data => setFavorite(data.favorite));
         
-        console.log('Deleted from favorites');
+        // console.log('Deleted from favorites');
       }  
     }
 
     // Check whether card is already a favorite
-    authFetch(`/api/favorites?business_id=${props.business.id}`)
-      .then(response => response.json())
-      .then(data => setFavorite(data.favorite));
+      // useEffect(() => {
+      // authFetch(`/api/get_favorites?business_id=${props.business.id}`)
+      // .then(response => response.json())
+      // .then(data => setFavorite(data.favorite));
+      // }, [])
+
+
       return (
         <div className='Business'>
           <Card height='100px'>
@@ -185,12 +195,15 @@ export function Detail(props) {
                 <Button size="small" variant="contained" color="secondary" onClick={handleRate}>
                   Rate
                 </Button>
-                {!favorite ? <IconButton onClick={onFavoriteClick}>
+                <IconButton onClick={onFavoriteClick}>
+                  <AddIcon style={{ color: '#fdd835' }} />
+                </IconButton>
+                {/* {!favorite ? <IconButton onClick={onFavoriteClick}>
                   <StarBorderIcon style={{ color: '#fdd835' }} />
                 </IconButton>
                 : <IconButton onClick={onFavoriteClick}>
                 <StarIcon style={{ color: '#fdd835' }} />
-                </IconButton>}
+                </IconButton>} */}
                 </CardActions>
               </div>
               : <div></div>}
@@ -210,12 +223,15 @@ export function Detail(props) {
                   <Button size="small" variant="contained" color="secondary" onClick={handleRate}>
                     Rate
                   </Button>
-                  {!favorite ? <IconButton onClick={onFavoriteClick}>
+                  <IconButton onClick={onFavoriteClick}>
+                  <AddIcon style={{ color: '#fdd835' }} />
+                </IconButton>
+                  {/* {!favorite ? <IconButton onClick={onFavoriteClick}>
                     <StarBorderIcon style={{ color: '#fdd835' }} />
                   </IconButton>
                   : <IconButton onClick={onFavoriteClick}>
                   <StarIcon style={{ color: '#fdd835' }} />
-                  </IconButton>}
+                  </IconButton>} */}
                   <IconButton onClick={handleClose}>
                     <CloseIcon />
                   </IconButton>
