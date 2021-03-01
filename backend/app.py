@@ -231,13 +231,13 @@ def post_rate():
             # print(f'{rating}, {business_id}, {text}')
 
             if db.session.query(BusinessDetail).filter(BusinessDetail.business_id == business_id).count() == 0:
-                gr_id = idcounter()
-                grdata = BusinessDetail(bid, business_id)
-                db.session.add(grdata)
+                bid = idcounter()
+                bizdata = BusinessDetail(bid, business_id)
+                db.session.add(bizdata)
                 db.session.commit()
             else:
-                grfilter = db.session.query(BusinessDetail).filter(BusinessDetail.business_id == business_id).first()
-                gr_id = grfilter.b_id
+                bizfilter = db.session.query(BusinessDetail).filter(BusinessDetail.business_id == business_id).first()
+                bid = bizfilter.b_id
 
             data = Reviews(col_id, reviewid, userid, business_id, rating, text, bid, username)
             db.session.add(data)

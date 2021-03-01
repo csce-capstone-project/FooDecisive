@@ -128,14 +128,16 @@ export function BigSearchBar(props) {
         <ul>
           {renderSortByOptions()}
         </ul>
-      </div>
-      <div className="SearchBar-fields">
+        <div className="SearchBar-fields">
         <input placeholder="Find" onChange={handleTermChange} />
         <input placeholder="Near" value={location} onChange={handleLocationChange} />
-        <button onClick={getCurrentLocation}> Current location</button>
       </div>
       <div className="SearchBar-submit">
-        <Button onClick={handleSearch} disabled={!validate()}>Search</Button>
+        {/* <button style={{}} onClick={handleSearch} disabled={!validate()}>Search</button>
+        <button onClick={getCurrentLocation}> Current location</button> */}
+        <Button onClick={getCurrentLocation}>Set As Current location</Button> <br></br> <br></br>
+        <Button color="primary" onClick={handleSearch} disabled={!validate()}>Search</Button>
+      </div>
       </div>
     </div>
   );

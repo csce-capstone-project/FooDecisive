@@ -89,7 +89,7 @@
     text-align: center;
   }
   
-  .SearchBar-submit a {
+  .SearchBar-submit button {
     border-radius: 4px;
     padding: .72rem 1.7rem;
     background-color: #69190e;
