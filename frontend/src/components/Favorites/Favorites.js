@@ -20,7 +20,7 @@ import Form from "react-bootstrap/Form";
 import AddIcon from '@material-ui/icons/Add';
 
 import { yelpBusID } from '../../services/yelp';
-
+import {FavoritesList} from './FavoritesList';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export function Favorites(props) {
+export function Favorites() {
   const [results, setResults] = useState([]);
 
 
@@ -57,7 +57,8 @@ export function Favorites(props) {
     })
   }, [])
 
-  return(<div>{results[0]}</div>)
+  console.log(results)
+  return(<FavoritesList businesses={results}></FavoritesList>)
     
 }
       
