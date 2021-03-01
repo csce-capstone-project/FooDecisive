@@ -5,8 +5,11 @@ import InputBase from '@material-ui/core/InputBase';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import { Typography } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
 
 import './BigSearchBar.css';
+import Map from '../RestaurantDetail/map'
+
 require('dotenv').config()
 const { REACT_APP_GOOGLE_MAPS_API_KEY } = process.env;
 const API_KEY = REACT_APP_GOOGLE_MAPS_API_KEY
@@ -19,15 +22,18 @@ const WhiteTextTypography = withStyles({
 })(Typography);
 
 
+const google = window.google;
+
 export function BigSearchBar(props) {
 
 
 
-
+  
   const [term, setTerm] = useState('')
   const [location, setLocation] = useState('')
   const [sortBy, setSortBy] = useState('best_match')
   //getCurrentLocation()
+  
 
 
 
@@ -39,17 +45,16 @@ export function BigSearchBar(props) {
     navigator.geolocation.getCurrentPosition(
       function (position) {
         console.log(position);
-        //setLat(position.coords.latitude);
-        //setLng(position.coords.longitude);
-        //setLocation(position.coords.latitude + ", " + position.coords.longitude);
-        //return (position.coords.latitude + ", " + position.coords.longitude);
         fetch('https://maps.googleapis.com/maps/api/geocode/json?address=' + position.coords.latitude + ',' + position.coords.longitude + '&key=' + API_KEY)
         .then((response) => response.json())
         .then((responseJson) => {
-            console.log('ADDRESS GEOCODE is BACK!! => ' + JSON.stringify(responseJson));
+            console.log('ADDRESS GEOCODE' + JSON.stringify(responseJson.results[0].formatted_address))
 
+            setLocation(JSON.stringify(responseJson.results[0].formatted_address));
           })
+          
       },
+
       function (error) {
         console.error("Error Code = " + error.code + " - " + error.message);
       }
@@ -112,8 +117,8 @@ export function BigSearchBar(props) {
       </div>
       <div className="SearchBar-fields">
         <input placeholder="Find" onChange={handleTermChange} />
-        <input placeholder="Near" onChange={handleLocationChange} />
-        <button onClick={getCurrentLocation}>Current location</button>
+        <input placeholder="Near" value={location} onChange={handleLocationChange} />
+        <button onClick={getCurrentLocation}> Current location</button>
       </div>
       <div className="SearchBar-submit">
         <a onClick={handleSearch}>Search</a>

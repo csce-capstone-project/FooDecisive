@@ -4,6 +4,7 @@ import { render } from 'react-dom';
 require('dotenv').config()
 const { REACT_APP_GOOGLE_MAPS_API_KEY } = process.env;
 const API_KEY = REACT_APP_GOOGLE_MAPS_API_KEY
+const google = window.google
 
 class Map extends Component {
     constructor(props) {
