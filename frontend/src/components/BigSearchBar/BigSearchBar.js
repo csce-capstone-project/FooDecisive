@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
@@ -7,7 +7,9 @@ import SearchIcon from '@material-ui/icons/Search';
 import { Typography } from '@material-ui/core';
 
 import './BigSearchBar.css';
-
+require('dotenv').config()
+const { REACT_APP_GOOGLE_MAPS_API_KEY } = process.env;
+const API_KEY = REACT_APP_GOOGLE_MAPS_API_KEY
 
 
 const WhiteTextTypography = withStyles({
@@ -20,71 +22,104 @@ const WhiteTextTypography = withStyles({
 export function BigSearchBar(props) {
 
 
-    const [term, setTerm] = useState('')
-    const [location, setLocation] = useState('')
-    const [sortBy, setSortBy] = useState('best_match')
 
 
-    let sortByOptions = {
-        'Best Match': 'best_match',
-        'Highly Rated': 'rating',
-        'Most Reviewed': 'review_count'
-    }
+  const [term, setTerm] = useState('')
+  const [location, setLocation] = useState('')
+  const [sortBy, setSortBy] = useState('best_match')
+  //getCurrentLocation()
 
-    function getSortByClass(sortByOption) {
-          if(sortBy === sortByOption) {
-            return 'active';
-          } else {
-            return '';
-            }
+
+
+  //Get user location
+  const [lat, setLat] = useState('latitude')
+  const [lng, setLng] = useState('longitude')
+  //Get user location
+  function getCurrentLocation() {
+    navigator.geolocation.getCurrentPosition(
+      function (position) {
+        console.log(position);
+        //setLat(position.coords.latitude);
+        //setLng(position.coords.longitude);
+        //setLocation(position.coords.latitude + ", " + position.coords.longitude);
+        //return (position.coords.latitude + ", " + position.coords.longitude);
+        fetch('https://maps.googleapis.com/maps/api/geocode/json?address=' + position.coords.latitude + ',' + position.coords.longitude + '&key=' + API_KEY)
+        .then((response) => response.json())
+        .then((responseJson) => {
+            console.log('ADDRESS GEOCODE is BACK!! => ' + JSON.stringify(responseJson));
+
+          })
+      },
+      function (error) {
+        console.error("Error Code = " + error.code + " - " + error.message);
       }
+    );
+  };
+  
 
-    function handleSortByChange(sortByOption) {
-      setSortBy(sortByOption)
-    }
+  let sortByOptions = {
+    'Best Match': 'best_match',
+    'Highly Rated': 'rating',
+    'Most Reviewed': 'review_count'
+  }
 
-    function handleTermChange(e) {
-      setTerm(e.target.value)
+  function getSortByClass(sortByOption) {
+    if (sortBy === sortByOption) {
+      return 'active';
+    } else {
+      return '';
     }
+  }
 
-    function handleLocationChange(e) {
-        setLocation(e.target.value)
-    }
+  function handleSortByChange(sortByOption) {
+    setSortBy(sortByOption)
+  }
 
-    function handleSearch(e) {
-      props.searchYelp(term, location, sortBy);
-      e.preventDefault();
-    }
+  function handleTermChange(e) {
+    setTerm(e.target.value)
+  }
+
+  function handleLocationChange(e) {
+    setLocation(e.target.value)
+  }
+
+  function handleSearch(e) {
+    props.searchYelp(term, location, sortBy);
+    e.preventDefault();
+  }
 
 
 
   const renderSortByOptions = () => {
     return Object.keys(sortByOptions).map(sortByOption => {
-        let sortByOptionValue = sortByOptions[sortByOption];
-        return (<li key={sortByOptionValue} className={getSortByClass(sortByOptionValue)}
+      let sortByOptionValue = sortByOptions[sortByOption];
+      return (<li key={sortByOptionValue} className={getSortByClass(sortByOptionValue)}
         onClick={() => handleSortByChange(sortByOptionValue)}>{sortByOption}</li>);
-      });
+    });
   }
 
-    return (
-      <div className="SearchBar">   
+
+
+  return (
+    <div className="SearchBar">
       <div className="SearchBar-sort-options">
-      <WhiteTextTypography variant="h2" align="center" id="myElement" gutterBottom>
-              Welcome to Search!
+        <WhiteTextTypography variant="h2" align="center" id="myElement" gutterBottom>
+          Welcome to Search!
       </WhiteTextTypography>
         <ul>
-            {renderSortByOptions()}
+          {renderSortByOptions()}
         </ul>
       </div>
       <div className="SearchBar-fields">
-        <input placeholder="Find" onChange={handleTermChange}/>
-        <input placeholder="Near" onChange={handleLocationChange}/>
+        <input placeholder="Find" onChange={handleTermChange} />
+        <input placeholder="Near" onChange={handleLocationChange} />
+        <button onClick={getCurrentLocation}>Current location</button>
       </div>
       <div className="SearchBar-submit">
         <a onClick={handleSearch}>Search</a>
       </div>
-      </div>
-        );
+    </div>
+  );
 }
 
 // export function BigSearchBar() {
