@@ -252,7 +252,7 @@ def post_rate():
 @flask_praetorian.auth_required
 def get_favorites():
     if flask_praetorian.current_user().username is not None:
-        userid = user_id(flask_praetorian.current_user().username)
+        userid = db.session.query(User).filter(User.username == flask_praetorian.current_user().username).with_entities(User.id).first()
 
 
         business_id = request.args.get('business_id')

@@ -57,8 +57,7 @@ export function Favorites() {
     })
   }, [])
 
-  console.log(results)
-  return(<FavoritesList businesses={results}></FavoritesList>)
+  return(<FavoritesList businesses={results}></FavoritesList>);
     
 }
       

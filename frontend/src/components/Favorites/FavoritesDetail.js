@@ -193,9 +193,12 @@ export function FavoritesDetail(props) {
                 <Button size="small" variant="contained" color="secondary" onClick={handleRate}>
                   Rate
                 </Button>
-                <IconButton onClick={onFavoriteClick}>
-                  <AddIcon style={{ color: '#fdd835' }} />
-                </IconButton>
+                {!favorite ? <IconButton onClick={onFavoriteClick}>
+                    <StarBorderIcon style={{ color: '#fdd835' }} />
+                  </IconButton>
+                  : <IconButton onClick={onFavoriteClick}>
+                  <StarIcon style={{ color: '#fdd835' }} />
+                  </IconButton>}
             </CardActions>
           </Card>
           <Dialog
@@ -212,8 +215,14 @@ export function FavoritesDetail(props) {
                   <Button size="small" variant="contained" color="secondary" onClick={handleRate}>
                     Rate
                   </Button>
-                  <IconButton onClick={onFavoriteClick}>
-                    <AddIcon style={{ color: '#fdd835' }} />
+                  {!favorite ? <IconButton onClick={onFavoriteClick}>
+                    <StarBorderIcon style={{ color: '#fdd835' }} />
+                  </IconButton>
+                  : <IconButton onClick={onFavoriteClick}>
+                  <StarIcon style={{ color: '#fdd835' }} />
+                  </IconButton>}
+                  <IconButton onClick={handleClose}>
+                    <CloseIcon />
                   </IconButton>
                 </Box>
             </Box>
