@@ -37,27 +37,28 @@ export function Favorites() {
   const [results, setResults] = useState([]);
 
 
-  useEffect(async () => {
-    await authFetch("/api/get_favorites").then(res => {
+  useEffect(() => {
+    authFetch("/api/get_favorites").then(res => {
         return res.json()
     }).then(res => {
         console.log(res['businesses'])
         let businesses = res['businesses']
-        console.log(businesses.length)
-        let bus = []
+        return businesses
 
-        for(let i = 0; i < businesses.length; i++) {
-          yelpBusID.searchByID(businesses[i][0]).then(business => {bus.push(business)})
-        }
-
-        return bus
-    }).then(business => { 
-        setResults(business)
-        console.log(business)
+    }).then((businesses) => {
+      let bus = []   
+      for(let i = 0; i < businesses.length; i++) {
+        yelpBusID.searchByID(businesses[i][0]).then(business => {
+          console.log(business)
+          bus.push(business)
+          setResults(bus)
+          console.log(results)
+        })
+      }  
     })
   }, [])
 
-  return(<FavoritesList businesses={results}></FavoritesList>);
+  return(<FavoritesList businesses={results} />);
     
 }
       
