@@ -1,13 +1,13 @@
 import React from 'react';
 import './FavoritesList.css';
-import {Detail} from './Detail';
+import {FavoritesDetail} from './FavoritesDetail';
 
-export function List(props) {
+export function FavoritesList(props) {
         return (
             <div className="BusinessList">
                 {
                     props.businesses.map(business => {
-                    return <Detail business={business} key={business.id}/>;
+                    return <FavoritesDetail business={business} key={business.id} isFavoritesList={true}/>;
                     })
                 }
             </div>

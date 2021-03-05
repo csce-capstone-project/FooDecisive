@@ -20,6 +20,7 @@ import {authFetch, useAuth} from "../../services/authentication";
 import Form from "react-bootstrap/Form";
 import Map from './map'
 import AddIcon from '@material-ui/icons/Add';
+import Rating from '@material-ui/lab/Rating';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -74,7 +75,7 @@ export function Detail(props) {
     }
 
     function validate(){
-      return rate.length > 0 && review.length > 0 && review.length < 101;
+      return Number(rate) > 0 && review.length > 0 && review.length < 101;
     }
 
     useEffect(() => {
@@ -309,7 +310,7 @@ export function Detail(props) {
                  <Grid item xs={6}>
                   <DialogContent>
                     <Form onSubmit={onSubmitClick}>
-                      <Form.Group controlId="rate">
+                      {/* <Form.Group controlId="rate">
                         <Form.Label>Rate</Form.Label>
                         {['radio'].map((type) =>(
                           <div key={`inline-${type}`} className="mb-3">
@@ -320,7 +321,17 @@ export function Detail(props) {
                             <Form.Check inline value="5" label="5" type={type} name="radio" id={`inline-${type}-5`} onChange={handleRateChange} />
                           </div>
                         ))}
-                      </Form.Group>
+                      </Form.Group> */}
+                        <Box component="fieldset" mb={3} borderColor="transparent">
+                          <Typography component="legend">Rate</Typography>
+                          <Rating
+                            name="simple-controlled"
+                            value={rate}
+                            onChange={(event, newValue) => {
+                              setRate(newValue);
+                            }}
+                          />
+                        </Box>
                       <Form.Group controlId="review">
                         <Form.Label>Review</Form.Label>
                         <Form.Control autoFocus type="text" placeholder="Review (100 characters)" value={review} onChange={handleReviewChange} />
