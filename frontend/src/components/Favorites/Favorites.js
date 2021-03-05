@@ -35,27 +35,43 @@ const useStyles = makeStyles((theme) => ({
 
 export function Favorites() {
   const [results, setResults] = useState([]);
+  const [promise, setPromise] = useState([]);
 
 
   useEffect(() => {
-    authFetch("/api/get_favorites").then(res => {
+    const abortController = new AbortController()
+    const signal = abortController.signal
+
+    authFetch("/api/get_favorites", { signal: signal }).then(res => {
         return res.json()
     }).then(res => {
         console.log(res['businesses'])
         let businesses = res['businesses']
-        return businesses
+        
+        let bus = []   
+        for(let i = 0; i < businesses.length; i++) {
+          bus.push(yelpBusID.searchByID(businesses[i][0]))
+          // yelpBusID.searchByID(businesses[i][0]).then(business => {
+          //   console.log(business)
+          //   bus.push(business)
+          //   setResults(bus)
+          //   console.log(results)
+          // })
+        }  
 
-    }).then((businesses) => {
-      let bus = []   
-      for(let i = 0; i < businesses.length; i++) {
-        yelpBusID.searchByID(businesses[i][0]).then(business => {
-          console.log(business)
-          bus.push(business)
-          setResults(bus)
-          console.log(results)
+        Promise.all(bus).then((res) => {
+          return res
+        }).then((business) => {
+          setResults(business)
         })
-      }  
+
     })
+
+
+    return function cleanup() {
+      abortController.abort()
+    }
+
   }, [])
 
   return(<FavoritesList businesses={results} />);
