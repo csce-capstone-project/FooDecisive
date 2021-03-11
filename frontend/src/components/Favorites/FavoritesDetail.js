@@ -141,31 +141,30 @@ export function FavoritesDetail(props) {
           // setFavorite(data.favorite)
           console.log("Added to favorites!")
         });
-        // setFavorite(true)
       }
       else {
         setFavorite(false)
-        // let opts = {
-        //   'businessid': props.business.id,
-        //   'addFavorite': 'delete'
-        // }
-        // console.log(opts);
-        // authFetch('/api/favorites', {
-        //   method: 'post',
-        //   body: JSON.stringify(opts)
-        // }).then(r => r.json())
-        // .then(data => setFavorite(data.favorite));
+        let opts = {
+          'businessid': props.business.id,
+          'addFavorite': 'delete'
+        }
+        console.log(opts);
+        authFetch('/api/favorites', {
+          method: 'post',
+          body: JSON.stringify(opts)
+        }).then(r => r.json())
         
-        // console.log('Deleted from favorites');
+        console.log('Deleted from favorites');
+        window.location.reload();
       }  
     }
 
     // Check whether card is already a favorite
-      // useEffect(() => {
-      // authFetch(`/api/get_favorites?business_id=${props.business.id}`)
-      // .then(response => response.json())
-      // .then(data => setFavorite(data.favorite));
-      // }, [])
+      useEffect(() => {
+      authFetch(`/api/favorites?business_id=${props.business.id}`)
+      .then(response => response.json())
+      .then(data => setFavorite(data.favorite));
+      }, [])
 
 
       return (
