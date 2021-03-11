@@ -33,6 +33,7 @@ from models.review import Reviews
 from models.recs import NewRecs
 from models.business_detail import BusinessDetail
 from models.favorites import Favorites
+from models.yelp_reviews import YelpReviews
 
 
 guard = flask_praetorian.Praetorian()
@@ -75,7 +76,8 @@ def user_id(userid):
         if not idquery:
             last_id = 0
         else:  
-            last_id = my_random_string(22)
+            last_id = int(idquery.userid)
+            # last_id = my_random_string(22)
 
         next_id = last_id
         return next_id
