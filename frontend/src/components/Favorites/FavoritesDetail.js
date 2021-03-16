@@ -19,6 +19,7 @@ import Grid from '@material-ui/core/Grid';
 import {authFetch, useAuth} from "../../services/authentication";
 import Form from "react-bootstrap/Form";
 import AddIcon from '@material-ui/icons/Add';
+import Map from '../RestaurantDetail/map'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -193,11 +194,11 @@ export function FavoritesDetail(props) {
                   Rate
                 </Button>
                 {!favorite ? <IconButton onClick={onFavoriteClick}>
-                    <StarBorderIcon style={{ color: '#fdd835' }} />
-                  </IconButton>
-                  : <IconButton onClick={onFavoriteClick}>
-                  <StarIcon style={{ color: '#fdd835' }} />
-                  </IconButton>}
+                  <StarBorderIcon style={{ color: '#fdd835' }} />
+                </IconButton>
+                : <IconButton onClick={onFavoriteClick}>
+                <StarIcon style={{ color: '#fdd835' }} />
+                </IconButton>}
             </CardActions>
           </Card>
           <Dialog
@@ -243,7 +244,26 @@ export function FavoritesDetail(props) {
                   </DialogContentText>
                  </Grid>
                  <Grid item xs={6} justify-content='center'><img src={props.business.imageSrc} height='200px'/></Grid>
-                 <Grid item xs={12}>(Google Maps API goes here)</Grid>
+                 <Grid item xs={12}>
+                 <Map
+                  id="myMap"
+                  options={{
+                    center: { lat: parseFloat(props.business.latitude), lng: parseFloat(props.business.longitude) },
+                    zoom: 14
+                  }}
+                  onMapLoad={map => {
+                    var lat = parseFloat(props.business.latitude);
+                    var long = parseFloat(props.business.longitude);
+                    var marker = new window.google.maps.Marker({
+                      position: { lat: lat, lng: long },
+                      map: map,
+                      title: 'Restaurant here',
+                      setContent: 'Restaurant here'
+                    });
+                  }}
+                />
+
+                 </Grid>
                 </Grid>
               </div>
             </DialogContent>

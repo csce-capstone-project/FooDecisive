@@ -56,7 +56,6 @@ export function Favorites() {
 
   return(
     <div>
-      <Pagination count={10} />
       {results.length != 0  ? <FavoritesList businesses={results} />
       : <Typography gutterBottom variant="body2" component="p">No favorites found.</Typography>}
     </div>

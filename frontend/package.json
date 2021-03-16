@@ -9,6 +9,8 @@
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.3",
     "@testing-library/user-event": "^12.6.0",
+    "@types/react-map-gl": "^5.2.0",
+    "axios": "^0.19.2",
     "bootstrap": "^4.6.0",
     "bulma": "^0.9.0",
     "dotenv": "^8.2.0",
@@ -26,7 +28,12 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
     "use-react-router": "^1.0.7",
-    "web-vitals": "^0.2.4"
+    "web-vitals": "^0.2.4",
+    "react-icons": "^3.9.0",
+    "react-loading-skeleton": "^2.0.1",
+    "react-map-gl": "^5.2.3",
+    "react-select": "^3.1.0",
+    "react-tilt": "^0.1.4"
   },
   "scripts": {
     "start": "react-scripts start",

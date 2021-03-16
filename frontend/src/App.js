@@ -1,17 +1,25 @@
-import React from 'react'
+import React, { useState }from 'react'
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import { Home } from './components/Home/Home'
 import { HomeNavBar } from './components/NavBar/NavBar'
 import { Login } from './components/Login/Login'
 import { Search } from './components/BigSearchBar/Search'
 import { Register } from './components/Register/Register'
-import { ChatBot } from './components/ChatBot/ChatBot'
+import { Chat } from './components/Chat/Chat'
+import { RestaurantContainer } from './components/RestaurantContainer/RestaurantContainer'
 import { Favorites } from './components/Favorites/Favorites'
+import { useLocation } from "./Hooks/useLocation";
+import Context from "./Context";
 export const UsernameContext = React.createContext('');
 
 
 
+
 export default function App() {
+  const [restaurants, setRestaurants] = useState([]);
+  const userLocation = useLocation();
+
+
   return (
     <Router>
       <div>
@@ -39,7 +47,11 @@ export default function App() {
             <Register/>
           </Route>
           <Route path ="/ChatBot">
-            <ChatBot/>
+            <Context.Provider value={{ userLocation, restaurants, setRestaurants }}>
+              <div className="app">
+              <Chat />
+              </div>
+            </Context.Provider>
           </Route>
           <Route path="/businessid">
           </Route>
