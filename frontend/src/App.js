@@ -7,6 +7,7 @@ import { Search } from './components/BigSearchBar/Search'
 import { Register } from './components/Register/Register'
 import { ChatBot } from './components/ChatBot/ChatBot'
 import { Favorites } from './components/Favorites/Favorites'
+import { Profile } from './components/Profile/Profile'
 export const UsernameContext = React.createContext('');
 
 
@@ -23,14 +24,14 @@ export default function App() {
           <Route path="/favs">
             <Favorites />
           </Route>
-        <Route path="/search">
-          <Search />
-        </Route>
+          <Route path="/search">
+            <Search />
+          </Route>
           <Route path="/recs">
 
           </Route>
-          <Route path="/favs">
-
+          <Route path="/profile">
+            <Profile />
           </Route>
           <Route path="/login">
             <Login />

@@ -94,7 +94,7 @@ export function HomeNavBar() {
                   open={Boolean(anchorEl)}
                   onClose={handleClose}
                 >
-                  <MenuItem onClick={handleClose}>Profile</MenuItem>
+                  <MenuItem component={Link} to='/profile'>Profile</MenuItem>
                   <MenuItem onClick={handleClose}>Settings</MenuItem>
                   <MenuItem onClick={() => handleClick()}>Logout</MenuItem>
                 </Menu>
