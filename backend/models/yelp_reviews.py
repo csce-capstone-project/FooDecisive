@@ -1,11 +1,11 @@
 from models import db
 
 # Reviews Model
-class Reviews(db.Model):
-    __tablename__ = 'reviews'
+class YelpReviews(db.Model):
+    __tablename__ = 'yelp_reviews'
     col_id = db.Column(db.Integer, primary_key=True)
     reviewid = db.Column(db.String(200))
-    userid = db.Column(db.Integer)
+    userid = db.Column(db.Integer, autoincrement=True)
     business_id = db.Column(db.String(200))
     rating = db.Column(db.Integer)
     text = db.Column(db.Text())
