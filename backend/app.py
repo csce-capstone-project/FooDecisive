@@ -69,22 +69,60 @@ def customid():
     return next_id
 
 
+
+def customid2():
+    idquery = db.session.query(YelpReviews).order_by(YelpReviews.col_id.desc()).first()
+
+    if not idquery:
+        last_id = 0
+    else:  
+        last_id = int(idquery.col_id)
+
+    next_id = int(last_id) + 1
+    return next_id
+
 def user_id(userid):
     if db.session.query(Reviews).filter(Reviews.username == userid).count() == 0:
         idquery = db.session.query(Reviews).order_by(Reviews.userid.desc()).first()
 
-        if not idquery:
-            last_id = 0
-        else:  
-            last_id = int(idquery.userid)
+        # if not idquery:
+        #     last_id = 0
+        # else:  
+        #     last_id = int(idquery.userid)
             # last_id = my_random_string(22)
+        
+        last_id = int(idquery.userid)
+        next_id = int(last_id) + 1
 
-        next_id = last_id
+        # next_id = last_id
         return next_id
     else:
         idquery = db.session.query(Reviews).filter(Reviews.username == userid).first()
         idquery_old = idquery.userid
         return idquery_old
+
+
+def uid(userid):
+    if db.session.query(YelpReviews).filter(YelpReviews.username == userid).count() == 0:
+        idquery = db.session.query(YelpReviews).order_by(YelpReviews.userid.desc()).first()
+
+        # if not idquery:
+        #     last_id = 0
+        # else:  
+        #     last_id = int(idquery.userid)
+        #     # last_id = my_random_string(22)
+        
+        last_id = int(idquery.userid)
+        next_id = int(last_id) + 1
+
+        # next_id = last_id
+        return next_id
+    else:
+        idquery = db.session.query(YelpReviews).filter(YelpReviews.username == userid).first()
+        idquery_old = idquery.userid
+        return idquery_old
+
+
 
 def idcounter():
     iding = db.session.query(BusinessDetail).order_by(BusinessDetail.b_id.desc()).first()
@@ -219,15 +257,15 @@ def post_rate():
 
 
             col_id = customid()
+            username = flask_praetorian.current_user().username
             reviewid = my_random_string(22)
-            userid = customid()
+            userid = user_id(username)
             business_id = req.get('businessid', None)
             rating = req.get('rating', None)
             if db.session.query(func.max(Reviews.bid)).scalar() is None:
                 bid = 1
             else:
                 bid = db.session.query(func.max(Reviews.bid)).scalar() + 1
-            username = flask_praetorian.current_user().username
             text = req.get('review', None)
 
             # print(f'{rating}, {business_id}, {text}')
@@ -241,9 +279,16 @@ def post_rate():
                 bizfilter = db.session.query(BusinessDetail).filter(BusinessDetail.business_id == business_id).first()
                 bid = bizfilter.b_id
 
+            # userid = uid(username)
             data = Reviews(col_id, reviewid, userid, business_id, rating, text, bid, username)
             db.session.add(data)
             db.session.commit()
+
+            col_id = customid2()
+            data1 = YelpReviews(col_id, reviewid, userid, business_id, rating, bid, username)
+            db.session.add(data1)
+            db.session.commit()
+
             return {'Status': 'Success'}
     else:
         return {'Status': 'Failed'}
@@ -280,7 +325,8 @@ def favorite():
         # userid = user_id(flask_praetorian.current_user().username)
         # userid = my_random_string(flask_praetorian.current_user().username)
         userid = db.session.query(User).filter(User.username == flask_praetorian.current_user().username).with_entities(User.id).first()
-
+        userid = userid[0]
+        
         # Should query from User table instead
         # Apply a hashed username to 
 
@@ -322,6 +368,42 @@ def favorite():
                 })
     else:
         return {'Status': 'Failed'}
+
+
+
+@app.route("/api/recs", methods=['GET'])
+@flask_praetorian.auth_required
+def getrecs():
+    if request.method == 'GET':
+        userid = uid(flask_praetorian.current_user().username)
+        recs = db.session.query(NewRecs).filter(NewRecs.userid == userid).all()
+        recs_list = []
+        for i in recs:
+            # if i.book_id == 4:
+            res_id = db.session.query(BusinessDetail).filter(BusinessDetail.b_id == i.bid).first().business_id
+            recs_list.append(res_id)
+            print(recs_list)
+        # bk = []
+        # for i in recs_list:
+        #     response_string = 'https://www.goodreads.com/book/show?id='+ str(i) + '&key=Ev590L5ibeayXEVKycXbAw'
+        #     xml = urllib2.urlopen(response_string)
+        #     data = xml.read()
+        #     xml.close()
+        #     data = xmltodict.parse(data)
+        #     gr_data = json.dumps(data)
+        #     goodreads_fnl = json.loads(gr_data)
+        #     gr = goodreads_fnl['GoodreadsResponse']['book']
+        #     bk.append(dict(id=gr['id'], book_title=gr['title'], image_url=gr['image_url']))
+
+        # book = dict(work=bk)
+        # return render_template('recs.html', recs = book)
+        return json.dumps({
+                'recs': recs_list
+            })
+    else:
+        return {'Status': 'Failed'}
+
+
 
 
 

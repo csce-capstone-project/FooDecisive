@@ -11,7 +11,7 @@ class YelpReviews(db.Model):
     bid = db.Column(db.Integer)
     username = db.Column(db.String(200))
 
-    def __init__(self, col_id, reviewid, userid, business_id, rating, text, bid, username):
+    def __init__(self, col_id, reviewid, userid, business_id, rating, bid, username):
         self.col_id = col_id
         self.userid = userid
         self.rating = rating

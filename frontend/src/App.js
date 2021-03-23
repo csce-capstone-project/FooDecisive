@@ -8,6 +8,7 @@ import { Register } from './components/Register/Register'
 import { Chat } from './components/Chat/Chat'
 import { RestaurantContainer } from './components/RestaurantContainer/RestaurantContainer'
 import { Favorites } from './components/Favorites/Favorites'
+import { Recs } from './components/Recommendations/Recs'
 import { useLocation } from "./Hooks/useLocation";
 import Context from "./Context";
 export const UsernameContext = React.createContext('');
@@ -35,7 +36,7 @@ export default function App() {
           <Search />
         </Route>
           <Route path="/recs">
-
+            <Recs />
           </Route>
           <Route path="/favs">
 
