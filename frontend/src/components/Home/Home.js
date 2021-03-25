@@ -91,20 +91,21 @@ export function Home() {
                 </Typography>
                 </Container>
                 </Box> :
+                
                 <Box bgcolor="success.main" boxShadow={4}>
-                  <Container maxWidth="sm">
                 <Typography variant="h2" align="center" gutterBottom>
-                Welcome to FooDecisive
+                Welcome to FooDecisive {username}!
                 </Typography>
-                <Typography variant="h4"  gutterBottom>
+                <Typography variant="h4" align="center" gutterBottom>
                 About FooDecisive
                 </Typography>
-                <Typography variant="body1"  gutterBottom>
-                Choice Overload – when people have trouble deciding when faced with many options.​ According to the US Bureau of Labor Statistics, the time people spend on eating and drinking, and food preparation and cleanups are around an average of two hours per day.​ Average American couple spends 132 hours a year deciding what to eat.
-                </Typography>
-                <Typography variant="body1"  gutterBottom>
+                <Container maxWidth="md">
+                <Typography variant="body3" align="left" >
                 Effectively provide list of restaurants to users based on their preferences​. Improved recommender system to consider additional preferences​. Complemented with map containing pinned restaurants​. Give users the option to view and save multiple lists​. Requires authentication​. Interactive website
                 </Typography>
+                
+                </Container>
+                <Container maxWidth="md" align="right">
                 <Button variant="contained" color="primary">
                     Log in
                 </Button>
