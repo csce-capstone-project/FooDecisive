@@ -34,7 +34,7 @@ export function Recs() {
         
         if (businesses !== undefined) {
           let bus = []   
-          for(let i = 0; i < 3; i++) {
+          for(let i = 4; i < 7; i++) {
             bus.push(yelpBusID.searchByID(businesses[i]))
           }
 
