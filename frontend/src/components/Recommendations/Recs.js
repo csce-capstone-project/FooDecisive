@@ -6,10 +6,14 @@ import Pagination from '@material-ui/lab/Pagination';
 import { yelpBusID } from '../../services/yelp';
 import {RecsList} from './RecsList';
 import Typography from '@material-ui/core/Typography';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Container from "@material-ui/core/Container";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1,
+    width: '60%',
+    padding: '10px',
+    margin: 'auto'
   },
   text: {
     textAlign: 'center',
@@ -20,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
 
 export function Recs() {
   const [results, setResults] = useState([]);
-
+  const classes = useStyles();
 
   useEffect(() => {
     const abortController = new AbortController()
@@ -57,7 +61,9 @@ export function Recs() {
   return(
     <div>
       {results.length != 0  ? <RecsList businesses={results} />
-      : <Typography gutterBottom variant="body2" component="p">No favorites found.</Typography>}
+      : <Container style={{margin: '0', position: 'absolute', top: '50%', left: '50%'}}>
+        <CircularProgress style={{color: 'orange'}}/>
+        </Container>}
     </div>
   );
     

@@ -1,8 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
-import { Typography, Paper, Grid } from '@material-ui/core';
+import { Typography, Paper, Grid, requirePropFactory } from '@material-ui/core';
 import {authFetch, useAuth} from "../../services/authentication"
-
+import Container from "@material-ui/core/Container";
+import CardMedia from "@material-ui/core/CardMedia";
+import { spacing } from '@material-ui/system';
+import CardContent from '@material-ui/core/CardContent';
+import { shadows } from '@material-ui/system';
+import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import SearchImage from '../Home/photo/search.png';
+import RateImage from '../Home/photo/rate.png';
+import Chatbot from '../Home/photo/Chatbot.png';
 
 const useStyles = makeStyles((theme) => ({
     about: {
@@ -16,7 +26,10 @@ const useStyles = makeStyles((theme) => ({
         margin: '30px auto 10px',
         maxWidth: '40%',
         background: 'darkorchid'
-    }
+    },
+    Feature: {    
+      padding: '70px',   
+    },
 }));
 
 
@@ -26,6 +39,7 @@ export function Home() {
     const [username, setUser] = useState("");
     const [logged] = useAuth();
  
+   
     // const { user } = props.location;
 
     // Basically like the old componentDidMount method. Like a constructor.
@@ -60,55 +74,169 @@ export function Home() {
 
     return(
         <div className="App" src="../../restaurant.jpg">
-            <header className="App-header">
+            {/*<header className="App-header">
                 <p>{currentMessage}</p>
-            </header>
+            </header> */}
             {logged ? 
+               <Box style={{backgroundColor: 'Orange', paddingBottom: '100px'}} boxShadow={4}>
+                 <Container style={{paddingTop: '100px'}}>
                 <Typography variant="h2" align="center" gutterBottom>
-                Welcome to FooDecisive {username}!
-                </Typography> : 
+                Welcome to FooDecisive, {username}!
+                </Typography>
+                </Container>
+                </Box> :
+                
+                <Box style={{backgroundColor: 'Orange'}} boxShadow={4}>
                 <Typography variant="h2" align="center" gutterBottom>
-                Welcome to FooDecisive
-                </Typography>}
-            
+                Welcome to FooDecisive!
+                </Typography>
+                <Typography variant="h4" align="center" gutterBottom>
+                About FooDecisive
+                </Typography>
+                <Container maxWidth="md">
+                <Typography variant="body3" align="left" >
+                Effectively provide list of restaurants to users based on their preferences​. Improved recommender system to consider additional preferences​. Complemented with map containing pinned restaurants​. Give users the option to view and save multiple lists​. Requires authentication​. Interactive website
+                </Typography>
+                
+                </Container>
+                <Container maxWidth="md" align="right">
+                <Button variant="contained" color="primary">
+                    Log in
+                </Button>
+                <Button variant="contained">Sign Up</Button>
+                </Container>
+                </Box> 
+            }
 
-            {/* <BigSearchBar/> */}
-            <Paper className={classes.about}>
-                <Grid container>
-                    <Grid item xs={12} sm container>
-                        <Grid item xs container direction="column" spacing={2}>
-                            <Grid item xs>
-                                <Typography variant='h6' display='inline-block' align='right' gutterBottom>
-                                    Have trouble deciding?
-                                </Typography>
-                                <Typography variant='body1' paragraph='True' gutterBottom>
-                                    "Where to eat?" seems to a big question that we can easily get caught up in. FooDecisive looks to answer that question almost instantly.
-                                </Typography>
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                </Grid>
-            </Paper>
-            <Paper className={classes.content}>
-                <Grid container>
-                    <Grid item xs={12} sm container>
-                        <Grid item xs container direction="column" spacing={2}>
-                            <Grid item xs>
-                                <Typography variant='h6' display='inline-block' style={ {color:'white'} } gutterBottom>
-                                    Services
-                                </Typography>
-                                <Typography variant='body1' paragraph='True' style={ {color:'white'} } gutterBottom>
-                                    <ul>
-                                        <li>Search system</li>
-                                        <li>Saving of recommended lists</li>
-                                        <li>Interaction with ChatBot</li>
-                                    </ul>
-                                </Typography>
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                </Grid>
-            </Paper>
-        </div>
+        <Container maxWidth="lg" className={classes.Feature} >
+        <Typography variant="h4" align="center" gutterBottom>
+                About FooDecisive
+                </Typography>
+                <Container maxWidth="md" style={{paddingBottom: '100px'}}>
+                <Typography variant="body3" align="left">
+                Thanks for stopping by! FooDecisive is a user-centric platform that was designed to give users the best experience possible in helping them
+                choose where to eat! Check out all the services we offer below!
+                </Typography>
+            </Container> 
+          <Grid container spacing={3}>
+            <Grid item xs={12} sm={6}>
+              <Container maxWidth="md">
+              <Typography variant="h4" gutterBottom>
+                Quick search for restautants
+                </Typography>
+                <Typography variant="body1" paragraph="True" gutterBottom>
+                Search for any restaurant filtered by best match, high rated, or most reviewed! Effectively provides top 20 search results in a specified location or from users' current location.
+                </Typography>
+                <Button variant="outlined" color="primary">
+                Go to Search
+                  </Button>
+              </Container>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+            <Box boxShadow={4}>
+              <CardMedia
+              
+                className={classes.media}
+                component='img'
+                height='400'
+                image = {SearchImage}
+              /></Box>
+            </Grid>
+
+          </Grid>
+        </Container>
+        
+        <Container maxWidth="lg" className={classes.Feature}>
+          <Grid container spacing={3}>
+            <Grid item xs={12} sm={6}>
+            <Box boxShadow={4}>
+            <CardMedia
+                className={classes.media}
+                component='img'
+                height='360'
+                image= {Chatbot}
+              /></Box>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <Container maxWidth="md">
+              <Typography variant="h4" gutterBottom>
+                Talk to Jesse, our Chatbot!
+                </Typography>
+                <Typography variant="body1" paragraph="True" gutterBottom>
+                Jesse is our conversational chatbot to increase interactivity with the users. You no longer have to make your restaurant choices alone! Jesse
+                can help you find restaurants in the local area and respond to your preferences! You may even get a meme response every now and then!
+                </Typography>
+                <Button variant="outlined" color="primary">
+                Talk to Jesse
+                  </Button>
+              </Container>
+            </Grid>
+          </Grid>
+        </Container>
+
+        <Container maxWidth="lg" className={classes.Feature} >
+          <Grid container spacing={3}>
+            <Grid item xs={12} sm={6}>
+              <Container maxWidth="md">
+              <Typography variant="h4" gutterBottom>
+                Rate and Favorite
+                </Typography>
+                <Typography variant="body1" paragraph="True" gutterBottom>
+                Our platform allows you to rate and review your favorite restaurants on scale 1 to 5 and can save your favorites for later access. 
+                Additionally, a Google Map is embedded into the UI to provide for a seamless experience for the user to navigate to restaurants! The ratings mechanism
+                  plays an enormous role in determining user likings, so make sure to tell us about your experiences at restaurants by rating them!
+                </Typography>
+              </Container>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+            <Box boxShadow={4}>
+              <CardMedia
+              
+                className={classes.media}
+                component='img'
+                height='500'
+                image = {RateImage}
+              /></Box>
+            </Grid>
+
+          </Grid>
+        </Container>
+
+
+        <Container maxWidth="lg" className={classes.Feature}>
+          <Grid container spacing={3}>
+            <Grid item xs={12} sm={6}>
+            <Box boxShadow={4}>
+            <CardMedia
+                className={classes.media}
+                component='img'
+                height='350'
+                //image= {searchImage}
+              /></Box>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <Container maxWidth="md">
+              <Typography variant="h4" gutterBottom>
+                Personalized Recommendations
+                </Typography>
+                <Typography variant='body1' paragraph='True' gutterBottom>
+                  Utilize our Collaborative Filtering based recommendation engine to get personalized restaurant recommendations! We 
+                  use the holistic taste preferences of similar users to recommend the top 10 best restaurants for the user. 
+                </Typography>
+                <Button variant="outlined" color="primary">
+                Get your recommendations
+                </Button>
+              </Container>
+            </Grid>
+          </Grid>
+        </Container>
+        <Box bgcolor="text.secondary" boxShadow={4}>
+        <Typography variant="body1" align="center" color="white" component="h2">
+          Capstone 2021: Created by Team 4
+        </Typography>
+        
+        </Box>
+    
+      </div>
     );
 }

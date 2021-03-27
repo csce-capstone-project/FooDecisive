@@ -6,6 +6,8 @@ import Pagination from '@material-ui/lab/Pagination';
 import { yelpBusID } from '../../services/yelp';
 import {FavoritesList} from './FavoritesList';
 import Typography from '@material-ui/core/Typography';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Container from "@material-ui/core/Container";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -57,7 +59,9 @@ export function Favorites() {
   return(
     <div>
       {results.length != 0  ? <FavoritesList businesses={results} />
-      : <Typography gutterBottom variant="body2" component="p">No favorites found.</Typography>}
+      : <Container style={{margin: '0', position: 'absolute', top: '50%', left: '50%'}}>
+        <CircularProgress style={{color: 'orange'}}/>
+        </Container>}
     </div>
   );
     
