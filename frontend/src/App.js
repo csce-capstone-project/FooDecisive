@@ -12,9 +12,9 @@ import { Recs } from './components/Recommendations/Recs'
 import { useLocation } from "./Hooks/useLocation";
 import Context from "./Context";
 import { Profile } from './components/Profile/Profile'
-import {Transition, CSSTransition, TransitionGroup} from 'react-transition-group'
-import { play, exit } from './timelines'
-import { Container, Navbar, Nav } from 'react-bootstrap'
+// import {Transition, CSSTransition, TransitionGroup} from 'react-transition-group'
+// import { play, exit } from './timelines'
+// import { Container, Navbar, Nav } from 'react-bootstrap'
 export const UsernameContext = React.createContext('');
 
 
