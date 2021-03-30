@@ -323,7 +323,13 @@ def favorite():
     else:
         return {'Status': 'Failed'}
 
-
+@app.route('/api/get_review', methods=['GET', 'POST'])
+@flask_praetorian.auth_required
+def get_review():
+    if flask_praetorian.current_user().username is not None:
+        userid = db.session.query(User).filter(User.username == flask_praetorian.current_user().username).with_entities(User.id).first()
+        if request.method == 'GET':
+            reviews = 
 
 if __name__ == '__main__':
     app.debug = True
