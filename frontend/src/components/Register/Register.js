@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 import './Register.css'
 import Container from "@material-ui/core/Container";
 
+import Fade from 'react-reveal/Fade';
 
 export function Register() {
   const [user, setUser] = useState("");
@@ -40,6 +41,7 @@ export function Register() {
   }
 
   return(
+    <Fade>
     <Container style={{margin: '0', position: 'absolute', top: '30%', left: '40%', maxWidth: '500px'}}>
       <h2>Register</h2>
       <Form onSubmit={handleSubmit}>
@@ -56,5 +58,6 @@ export function Register() {
           </Button>
       </Form>
     </Container>
+    </Fade>
   );
 }

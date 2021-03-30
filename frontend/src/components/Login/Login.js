@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 import './Login.css'
 import {login, useAuth} from "../../services/authentication"
 import Container from "@material-ui/core/Container";
+import Fade from 'react-reveal/Fade';
 
 
 
@@ -53,6 +54,7 @@ export function Login() {
   }
 
   return (
+    <Fade>
     <Container style={{margin: '0', position: 'absolute', top: '30%', left: '40%', maxWidth: '500px'}}>
       {!logged ? <div>
       <h2>Login</h2>
@@ -72,5 +74,6 @@ export function Login() {
       </div>:
       <Redirect to='/'/>}
     </Container>
+    </Fade>
   )
 }

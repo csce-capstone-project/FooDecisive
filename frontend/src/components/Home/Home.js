@@ -14,6 +14,9 @@ import SearchImage from '../Home/photo/search.png';
 import RateImage from '../Home/photo/rate.png';
 import Chatbot from '../Home/photo/Chatbot.png';
 import { useHistory } from "react-router-dom";
+import Fade from 'react-reveal/Fade';
+import Zoom from 'react-reveal/Zoom';
+import Bounce from 'react-reveal/Bounce';
 
 const useStyles = makeStyles((theme) => ({
     about: {
@@ -75,6 +78,7 @@ export function Home() {
       }, [])
 
     return(
+      <Fade>
         <div className="App" src="../../restaurant.jpg">
             {/*<header className="App-header">
                 <p>{currentMessage}</p>
@@ -118,6 +122,7 @@ export function Home() {
             </Container> 
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6}>
+              <Zoom>
               <Container maxWidth="md">
               <Typography variant="h4" gutterBottom>
                 Quick search for restautants
@@ -129,8 +134,10 @@ export function Home() {
                 Go to Search
                   </Button>
               </Container>
+              </Zoom>
             </Grid>
             <Grid item xs={12} sm={6}>
+              <Bounce right>
             <Box boxShadow={4}>
               <CardMedia
               
@@ -139,6 +146,7 @@ export function Home() {
                 height='400'
                 image = {SearchImage}
               /></Box>
+              </Bounce>
             </Grid>
 
           </Grid>
@@ -147,6 +155,7 @@ export function Home() {
         <Container maxWidth="lg" className={classes.Feature}>
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6}>
+              <Bounce left>
             <Box boxShadow={4}>
             <CardMedia
                 className={classes.media}
@@ -154,8 +163,10 @@ export function Home() {
                 height='360'
                 image= {Chatbot}
               /></Box>
+              </Bounce>
             </Grid>
             <Grid item xs={12} sm={6}>
+              <Zoom>
               <Container maxWidth="md">
               <Typography variant="h4" gutterBottom>
                 Talk to Jesse, our Chatbot!
@@ -172,6 +183,7 @@ export function Home() {
                   <div></div>
                 }
               </Container>
+              </Zoom>
             </Grid>
           </Grid>
         </Container>
@@ -179,6 +191,7 @@ export function Home() {
         <Container maxWidth="lg" className={classes.Feature} >
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6}>
+              <Zoom>
               <Container maxWidth="md">
               <Typography variant="h4" gutterBottom>
                 Rate and Favorite
@@ -189,8 +202,10 @@ export function Home() {
                   plays an enormous role in determining user likings, so make sure to tell us about your experiences at restaurants by rating them! Sign up now to start rating!
                 </Typography>
               </Container>
+              </Zoom>
             </Grid>
             <Grid item xs={12} sm={6}>
+              <Bounce right>
             <Box boxShadow={4}>
               <CardMedia
               
@@ -199,6 +214,7 @@ export function Home() {
                 height='500'
                 image = {RateImage}
               /></Box>
+              </Bounce>
             </Grid>
 
           </Grid>
@@ -208,6 +224,7 @@ export function Home() {
         <Container maxWidth="lg" className={classes.Feature}>
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6}>
+              <Bounce left>
             <Box boxShadow={4}>
             <CardMedia
                 className={classes.media}
@@ -215,8 +232,10 @@ export function Home() {
                 height='350'
                 //image= {searchImage}
               /></Box>
+              </Bounce>
             </Grid>
             <Grid item xs={12} sm={6}>
+              <Zoom>
               <Container maxWidth="md">
               <Typography variant="h4" gutterBottom>
                 Personalized Recommendations
@@ -233,6 +252,7 @@ export function Home() {
                 <div></div>
                 }
               </Container>
+              </Zoom>
             </Grid>
           </Grid>
         </Container>
@@ -244,5 +264,6 @@ export function Home() {
         </Box>
     
       </div>
+      </Fade>
     );
 }
