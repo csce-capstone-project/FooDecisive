@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import './Register.css'
+import Fade from 'react-reveal/Fade';
 
 export function Register() {
   const [user, setUser] = useState("");
@@ -38,6 +39,7 @@ export function Register() {
   }
 
   return(
+    <Fade>
     <div className="Register">
       <h2 className="log">Register</h2>
       <Form onSubmit={handleSubmit}>
@@ -54,5 +56,6 @@ export function Register() {
           </Button>
       </Form>
     </div>
+    </Fade>
   );
 }

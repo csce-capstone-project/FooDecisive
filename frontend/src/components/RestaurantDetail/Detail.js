@@ -21,6 +21,7 @@ import Form from "react-bootstrap/Form";
 import Map from './map'
 import AddIcon from '@material-ui/icons/Add';
 import Rating from '@material-ui/lab/Rating';
+import Slide from 'react-reveal/Slide';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -171,6 +172,7 @@ export function Detail(props) {
 
 
       return (
+        <Slide bottom>
         <div className='Business'>
           <Card height='100px'>
             <CardActionArea onClick={(e) => handleOpen(e)}>
@@ -348,6 +350,7 @@ export function Detail(props) {
             </DialogContent>
           </Dialog>
         </div>
+        </Slide>
       );
   }
       

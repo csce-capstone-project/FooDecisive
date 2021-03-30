@@ -4,6 +4,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import './Login.css'
 import {login, useAuth} from "../../services/authentication"
+import Fade from 'react-reveal/Fade';
 
 
 
@@ -52,6 +53,7 @@ export function Login() {
   }
 
   return (
+    <Fade>
     <div className="Login">
       {!logged ? <div>
       <h2 className="log">Login</h2>
@@ -71,5 +73,6 @@ export function Login() {
       </div>:
       <Redirect to='/'/>}
     </div>
+    </Fade>
   )
 }

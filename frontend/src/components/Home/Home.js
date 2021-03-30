@@ -13,6 +13,9 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import SearchImage from '../Home/photo/search.png';
 import RateImage from '../Home/photo/rate.png';
 import Chatbot from '../Home/photo/Chatbot.png';
+import Fade from 'react-reveal/Fade';
+import Zoom from 'react-reveal/Zoom';
+import Bounce from 'react-reveal/Bounce';
 
 const useStyles = makeStyles((theme) => ({
     about: {
@@ -73,6 +76,7 @@ export function Home() {
       }, [])
 
     return(
+      <Fade>
         <div className="App" src="../../restaurant.jpg">
             {/*<header className="App-header">
                 <p>{currentMessage}</p>
@@ -117,6 +121,7 @@ export function Home() {
         <Container maxWidth="lg" className={classes.Feature} >
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6}>
+              <Zoom>
               <Container maxWidth="md">
               <Typography variant="h4" gutterBottom>
                 Quick search for restautants
@@ -129,8 +134,10 @@ export function Home() {
                 Go to Search
                   </Button>
               </Container>
+              </Zoom>
             </Grid>
             <Grid item xs={12} sm={6}>
+              <Bounce right>
             <Box boxShadow={4}>
               <CardMedia
               
@@ -139,6 +146,7 @@ export function Home() {
                 height='400'
                 image = {SearchImage}
               /></Box>
+              </Bounce>
             </Grid>
 
           </Grid>
@@ -147,6 +155,7 @@ export function Home() {
         <Container maxWidth="lg" className={classes.Feature}>
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6}>
+              <Bounce left>
             <Box boxShadow={4}>
             <CardMedia
                 className={classes.media}
@@ -154,8 +163,10 @@ export function Home() {
                 height='360'
                 image= {Chatbot}
               /></Box>
+              </Bounce>
             </Grid>
             <Grid item xs={12} sm={6}>
+              <Zoom>
               <Container maxWidth="md">
               <Typography variant="h4" gutterBottom>
                 Talks to our Chat bot - Jessie
@@ -164,6 +175,7 @@ export function Home() {
                 Conversational chatbot to ​increase interactivity​ using Wit AI (https://wit.ai/)​.Example query: "Show me ​restaurants in Arkansas"​. Intent: search​. Parameters​. Search query: restaurants​. Location: Arkansas
                 </Typography>
               </Container>
+              </Zoom>
             </Grid>
           </Grid>
         </Container>
@@ -171,6 +183,7 @@ export function Home() {
         <Container maxWidth="lg" className={classes.Feature} >
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6}>
+              <Zoom>
               <Container maxWidth="md">
               <Typography variant="h4" gutterBottom>
                 Rate and save your favorite restaurant
@@ -179,8 +192,10 @@ export function Home() {
                 Our platform help you rate, review your favorite restaurant on scale 1 to 5 and help you save your favorite for later access. 
                 </Typography>
               </Container>
+              </Zoom>
             </Grid>
             <Grid item xs={12} sm={6}>
+              <Bounce right>
             <Box boxShadow={4}>
               <CardMedia
               
@@ -189,6 +204,7 @@ export function Home() {
                 height='500'
                 image = {RateImage}
               /></Box>
+              </Bounce>
             </Grid>
 
           </Grid>
@@ -198,6 +214,7 @@ export function Home() {
         <Container maxWidth="lg" className={classes.Feature}>
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6}>
+              <Bounce left>
             <Box boxShadow={4}>
             <CardMedia
                 className={classes.media}
@@ -205,8 +222,10 @@ export function Home() {
                 height='350'
                 //image= {searchImage}
               /></Box>
+              </Bounce>
             </Grid>
             <Grid item xs={12} sm={6}>
+              <Zoom>
               <Container maxWidth="md">
               <Typography variant="h4" gutterBottom>
                 Machines learning recommender systems
@@ -226,6 +245,7 @@ export function Home() {
                                     </ul>
                                 </Typography>
               </Container>
+              </Zoom>
             </Grid>
           </Grid>
         </Container>
@@ -237,5 +257,6 @@ export function Home() {
         </Box>
     
       </div>
+      </Fade>
     );
 }
