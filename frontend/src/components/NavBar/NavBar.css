@@ -1,3 +1,8 @@
+.topnav{
+  position:absolute !important;
+  width:100% !important;
+}
+
 .links{
     list-style-type: none;
     margin: 0;
@@ -6,11 +11,11 @@
     background-color: #333;
     font-size: 1.5em;
   }
-  
+
   li .link{
     float: left;
   }
-  
+
   li .link{
     display: block;
     color: white;
@@ -18,11 +23,11 @@
     padding: 14px 16px;
     text-decoration: none;
   }
-  
+
   li .link:hover {
     background-color: #111;
   }
-  
+
   #log {
     float: right;
   }

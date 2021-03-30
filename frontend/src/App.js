@@ -24,7 +24,7 @@ export default function App() {
 
   return (
     <Router>
-      <div>
+      <div className="full-container">
         <HomeNavBar />
             <Route render={({location}) => (
                 <Switch location={location}>
