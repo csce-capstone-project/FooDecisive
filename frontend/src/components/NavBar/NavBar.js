@@ -65,7 +65,7 @@ export function HomeNavBar() {
     }, [])
 
       return (
-    <Navbar bg="dark" variant="dark" expand="lg">
+    <Navbar bg="dark" variant="dark" expand="lg" style={{position:'absolute', width:'100%'}}>
     <Navbar.Brand href="#home" style={{fontSize: '30px'}}>FooDecisive</Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">

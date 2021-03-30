@@ -41,8 +41,8 @@ export function Register() {
   }
 
   return(
-    <Fade>
     <Container style={{margin: '0', position: 'absolute', top: '30%', left: '40%', maxWidth: '500px'}}>
+      <Fade>
       <h2>Register</h2>
       <Form onSubmit={handleSubmit}>
           <Form.Group controlId="user">
@@ -57,7 +57,7 @@ export function Register() {
             Submit
           </Button>
       </Form>
+      </Fade>
     </Container>
-    </Fade>
   );
 }

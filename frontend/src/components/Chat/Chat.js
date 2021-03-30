@@ -8,12 +8,14 @@ import React, {
   useState
 } from "react";
 import "./Chat.css";
-
+import { makeStyles } from '@material-ui/core/styles';
 import { IoMdSend } from "react-icons/io";
 import ResizableTextarea from "../ResizableTextarea";
 import Bubble from "../Bubble";
 import { witaiREST } from '../../services/witai';
 import { List } from '../RestaurantDetail/List';
+import GridList from '@material-ui/core/GridList';
+import GridListTile from '@material-ui/core/GridListTile';
 
 import logo from "../../assets/logo.png";
 import {
@@ -86,6 +88,23 @@ const BubbleContainer = memo(({ bubbles }) => (
     ))}
   </div>
 ));
+
+
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+    overflow: 'hidden',
+    backgroundColor: theme.palette.background.paper,
+  },
+  gridList: {
+    width: 1300,
+    height: 850,
+  },
+}));
+
 
 export const Chat = () => {
   const [results, setResults] = useState([])
@@ -192,6 +211,9 @@ export const Chat = () => {
       />
     </div>
   );
+
+
+  const classes = useStyles();
   return (
     <div className="container">
       <div className="chat-container">
@@ -200,7 +222,9 @@ export const Chat = () => {
         {renderInput()}
       </div>
       <div className="list-container">
+      <GridList cellHeight={160} className={classes.gridList} cols={3}>
         <List businesses={results} />
+      </GridList>
       </div>
     </div>
   );

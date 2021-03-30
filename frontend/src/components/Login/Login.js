@@ -54,8 +54,9 @@ export function Login() {
   }
 
   return (
-    <Fade>
+    
     <Container style={{margin: '0', position: 'absolute', top: '30%', left: '40%', maxWidth: '500px'}}>
+      <Fade>
       {!logged ? <div>
       <h2>Login</h2>
       <Form onSubmit={onSubmitClick}>
@@ -73,7 +74,8 @@ export function Login() {
       </Form>
       </div>:
       <Redirect to='/'/>}
+      </Fade>
     </Container>
-    </Fade>
+    
   )
 }
