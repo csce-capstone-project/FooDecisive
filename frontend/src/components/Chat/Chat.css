@@ -1,6 +1,27 @@
+html, body, #root, .app, .full-container {
+  height: 100% !important;
+  width: 100% !important;
+  margin: 0px !important;
+  padding: 0px !important;
+}
+
+.container{
+  height: 100% !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 0 0 0 !important;
+  padding: 68px 0 0 0 !important;
+}
+
+.list-container{
+  float:left;
+  width:70%;
+}
+
 .chat-container {
-  width: 45vw;
-  height: 100vh;
+  float:left;
+  width: 30%;
+  height: 100%;
   box-shadow: 10px 0 50px rgba(0, 0, 0, 0.33);
   display: flex;
   align-items: center;

@@ -4,13 +4,16 @@ import React, {
   useReducer,
   useCallback,
   memo,
-  useRef
+  useRef,
+  useState
 } from "react";
 import "./Chat.css";
 
 import { IoMdSend } from "react-icons/io";
 import ResizableTextarea from "../ResizableTextarea";
 import Bubble from "../Bubble";
+import { witaiREST } from '../../services/witai';
+import { List } from '../RestaurantDetail/List';
 
 import logo from "../../assets/logo.png";
 import {
@@ -62,7 +65,9 @@ const callApi = (input, userLocation) => {
     })
   };
   const endpoint = process.env.REACT_APP_API_ENDPOINT;
-  return fetch(`${endpoint}/api/v1/message/`, requestOptions);
+  return witaiREST.chat(encodeURIComponent(input.trim()),userLocation).then(response =>{
+    return response;
+  })
 };
 
 // memoizing the two presentational components
@@ -83,6 +88,7 @@ const BubbleContainer = memo(({ bubbles }) => (
 ));
 
 export const Chat = () => {
+  const [results, setResults] = useState([])
   const [{ bubbles, shouldSend, botResponse }, dispatch] = useReducer(
     reducer,
     initialState
@@ -122,11 +128,11 @@ export const Chat = () => {
         const input = inputValue.substr(0, inputValue.length - 1); // Remove '\n' caracter at the end
         // fetch restaurants
         callApi(input, userLocation)
-          .then(response => response.json())
+          .then(response => response)
           .then(data => {
-            const results = data.results !== null ? data.results : [];
+            const resultsNew = data.results !== null ? data.results : [];
             dispatch({ type: "SET_BOT_RESPONSE", payload: data.message });
-            setRestaurants(results);
+            setResults(resultsNew);
           })
           .catch(e => {
             console.log(e);
@@ -187,10 +193,15 @@ export const Chat = () => {
     </div>
   );
   return (
-    <div className="chat-container">
-      <Header />
-      <BubbleContainer bubbles={bubbles} />
-      {renderInput()}
+    <div className="container">
+      <div className="chat-container">
+        <Header />
+        <BubbleContainer bubbles={bubbles} />
+        {renderInput()}
+      </div>
+      <div className="list-container">
+        <List businesses={results} />
+      </div>
     </div>
   );
 };

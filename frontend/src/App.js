@@ -22,7 +22,7 @@ export default function App() {
 
   return (
     <Router>
-      <div>
+      <div className="full-container">
         <HomeNavBar />
 
         {/* A <Switch> looks through its children <Route>s and
@@ -48,9 +48,7 @@ export default function App() {
           </Route>
           <Route path ="/ChatBot">
             <Context.Provider value={{ userLocation, restaurants, setRestaurants }}>
-              <div className="app">
               <Chat />
-              </div>
             </Context.Provider>
           </Route>
           <Route path="/businessid">
