@@ -13,7 +13,7 @@ export function Register() {
   const history = useHistory();
 
   function validate(){
-    return user.length > 0 && pass.length > 0;
+    return user.length > 0 && pass.length >= 8;
   }
 
   function handleSubmit(event){

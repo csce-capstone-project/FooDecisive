@@ -15,7 +15,7 @@ export function Login() {
   const [logged] = useAuth();
 
   function validate(){
-    return username.length > 0 && password.length > 0;
+    return username.length > 0 && password.length >= 0;
   }
 
   const onSubmitClick = (e)=>{
