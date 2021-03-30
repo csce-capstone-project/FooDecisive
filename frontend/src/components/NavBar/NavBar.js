@@ -65,8 +65,10 @@ export function HomeNavBar() {
     }, [])
 
       return (
-    <Navbar bg="dark" variant="dark">
+    <Navbar bg="dark" variant="dark" expand="lg">
     <Navbar.Brand href="#home" style={{fontSize: '30px'}}>FooDecisive</Navbar.Brand>
+    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+    <Navbar.Collapse id="basic-navbar-nav">
     <Nav className="mr-auto">
       <Nav.Link href="/" style={{fontSize: '25px'}}>Home</Nav.Link>
       <Nav.Link href="/search" style={{fontSize: '25px'}}>Search</Nav.Link>
@@ -94,6 +96,7 @@ export function HomeNavBar() {
                 </Menu>
             </div> : <div></div>}
     </Nav>
+    </Navbar.Collapse>
   </Navbar>
         // <nav className="topnav">
         //   <ul className="links">
