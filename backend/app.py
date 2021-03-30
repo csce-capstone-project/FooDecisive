@@ -323,13 +323,22 @@ def favorite():
     else:
         return {'Status': 'Failed'}
 
-@app.route('/api/get_review', methods=['GET', 'POST'])
+@app.route('/api/get_reviews', methods=['GET', 'POST'])
 @flask_praetorian.auth_required
 def get_review():
     if flask_praetorian.current_user().username is not None:
-        userid = db.session.query(User).filter(User.username == flask_praetorian.current_user().username).with_entities(User.id).first()
+        userid = db.session.query(Reviews).filter(Reviews.username == flask_praetorian.current_user().username).with_entities(Reviews.userid).first()
         if request.method == 'GET':
-            reviews = 
+            revs = []
+            for review in db.session.query(Reviews).filter(Reviews.userid == userid).with_entities(Reviews.rating, Reviews.business_id, Reviews.text):
+                print(review)
+                rating, business_id, text = review
+                revs.append({'rating': rating, 'business_id': business_id, 'text': text})
+            print(revs)
+            #     revs.append(review.__dict__)
+            # print(revs)
+            # print(json.dumps(revs))
+            return jsonify(revs)
 
 if __name__ == '__main__':
     app.debug = True
