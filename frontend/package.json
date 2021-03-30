@@ -30,6 +30,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "react-select": "^3.1.0",
+    "react-swipeable-views": "^0.13.9",
     "react-tilt": "^0.1.4",
     "react-token-auth": "^1.1.7",
     "react-transition-group": "^4.4.1",

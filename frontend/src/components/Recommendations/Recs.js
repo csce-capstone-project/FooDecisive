@@ -61,7 +61,7 @@ export function Recs() {
   return(
     <div>
       {results.length != 0  ? <RecsList businesses={results} />
-      : <Container style={{margin: '0', position: 'absolute', top: '50%', left: '50%'}}>
+      : <Container style={{margin: '0 auto', position: 'absolute', top: '50%', left: '50%'}}>
         <CircularProgress style={{color: 'orange'}}/>
         </Container>}
     </div>

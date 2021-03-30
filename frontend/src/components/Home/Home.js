@@ -106,12 +106,15 @@ export function Home() {
                 Thanks for stopping by! FooDecisive is a user-centric platform that was designed to give users the best experience possible in helping them
                 choose where to eat! Check out all the services we offer below!
                 </Typography>
+                {!logged ? 
                 <Container maxWidth="md" align="center" style={{paddingTop: '50px'}}>
                 <Button variant="contained" style={{backgroundColor: "Orange", marginRight: '5%'}} onClick={() => {history.push('/login')}}>
                     Log in
                 </Button>
                 <Button variant="contained" onClick={() => {history.push('/register')}}>Sign Up</Button>
-                </Container>
+                </Container> :
+                <div></div>
+                }
             </Container> 
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6}>
