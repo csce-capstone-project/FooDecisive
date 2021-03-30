@@ -18,14 +18,6 @@ import { Container, Navbar, Nav } from 'react-bootstrap'
 export const UsernameContext = React.createContext('');
 
 
-
-const routes = [
-  { path: '/', name: 'Home', Component: Home },
-  { path: '/login', name: 'Login', Component: Login },
-  { path: '/search', name: 'Search', Component: Search },
-  { path: '/register', name: 'Register', Component: Register },
-]
-
 export default function App() {
   const [restaurants, setRestaurants] = useState([]);
   const userLocation = useLocation();
@@ -35,14 +27,6 @@ export default function App() {
       <div>
         <HomeNavBar />
             <Route render={({location}) => (
-              <TransitionGroup component={null}>
-              <Transition
-                  key={location.key}
-                  appear={true}
-                  // onEnter={(node, appears) => play(location.pathname, node, appears)}
-                  onExit={(node, appears) => exit(node)}
-                  timeout={{enter: 750, exit: 150}}
-                >
                 <Switch location={location}>
                 <Route exact path="/">
                     <Home />
@@ -75,8 +59,6 @@ export default function App() {
                   <Route path="/businessid">
                   </Route>
                 </Switch>
-                </Transition>
-                </TransitionGroup>
             )} 
             />
       </div>
