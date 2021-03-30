@@ -8,7 +8,6 @@ class YelpReviews(db.Model):
     userid = db.Column(db.Integer, autoincrement=True)
     business_id = db.Column(db.String(200))
     rating = db.Column(db.Integer)
-    text = db.Column(db.Text())
     bid = db.Column(db.Integer)
     username = db.Column(db.String(200))
 
@@ -20,4 +19,3 @@ class YelpReviews(db.Model):
         self.bid = bid
         self.reviewid = reviewid
         self.username = username
-        self.text = text

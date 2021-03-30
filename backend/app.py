@@ -220,7 +220,7 @@ def post_rate():
 
             col_id = customid()
             reviewid = my_random_string(22)
-            userid = user_id(flask_praetorian.current_user().username)
+            userid = customid()
             business_id = req.get('businessid', None)
             rating = req.get('rating', None)
             if db.session.query(func.max(Reviews.bid)).scalar() is None:

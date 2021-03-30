@@ -5,6 +5,7 @@ import AddIcon from '@material-ui/icons/Add';
 import Pagination from '@material-ui/lab/Pagination';
 import { yelpBusID } from '../../services/yelp';
 import {FavoritesList} from './FavoritesList';
+import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,16 +32,18 @@ export function Favorites() {
         console.log(res['businesses'])
         let businesses = res['businesses']
         
-        let bus = []   
-        for(let i = 0; i < businesses.length; i++) {
-          bus.push(yelpBusID.searchByID(businesses[i][0]))
-        }  
+        if (businesses !== undefined) {
+          let bus = []   
+          for(let i = 0; i < businesses.length; i++) {
+            bus.push(yelpBusID.searchByID(businesses[i][0]))
+          }  
 
-        Promise.all(bus).then((res) => {
-          return res
-        }).then((business) => {
-          setResults(business)
-        })
+          Promise.all(bus).then((res) => {
+            return res
+          }).then((business) => {
+            setResults(business)
+          })
+        }
 
     })
 
@@ -53,8 +56,8 @@ export function Favorites() {
 
   return(
     <div>
-      <Pagination count={10} />
-      <FavoritesList businesses={results} />
+      {results.length != 0  ? <FavoritesList businesses={results} />
+      : <Typography gutterBottom variant="body2" component="p">No favorites found.</Typography>}
     </div>
   );
     
