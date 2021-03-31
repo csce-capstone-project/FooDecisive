@@ -1,16 +1,16 @@
 html, body, #root, .app, .full-container {
-  height: 100% !important;
+  height: 90% !important;
   width: 100% !important;
   margin: 0px !important;
   padding: 0px !important;
 }
 
 .container{
-  height: 100% !important;
+  height: 150% !important;
   width: 100% !important;
   max-width: 100% !important;
   margin: 0 0 0 0 !important;
-  padding: 85px 0 0 0 !important;
+  padding: 0px 0 0 0 !important;
 }
 
 .list-container{
@@ -29,7 +29,6 @@ html, body, #root, .app, .full-container {
   flex-direction: column;
   z-index: 1;
   position: relative;
-  margin-top: -85px;
 }
 
 .header-chat {
