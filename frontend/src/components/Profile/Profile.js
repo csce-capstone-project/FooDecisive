@@ -42,25 +42,36 @@ export function Profile() {
             for(let i = 0; i < res.length; i++) {
                 review_bus.push(res[i]['business_id'])
             }
-
+            console.log(review_bus)
             if (review_bus !== undefined) {
                 let bus = []   
                 for(let j = 0; j < review_bus.length; j++) {
                   bus.push(yelpBusID.searchByID(review_bus[j]))
                 }  
-      
                 Promise.all(bus).then((res) => {
+                    console.log(res)
                   return res
                 }).then((business) => {
                   setReviewBusinesses(business)
+                  console.log(review_businesses)
+                  for(let k = 0; k < res.length; k++) {
+                        res[k]['business_name'] = review_businesses[k]['name']
+                    }
+                    setReviews(res)
                 })
             }
-            for(let k = 0; k < res.length; k++) {
-                res[k]['business_name'] = review_businesses[k]['name']
-            }
-            setReviews(res)
-            console.log(reviews)
         })
+        // .then((review_b, resp) => {
+        //     for(let k = 0; k < resp.length; k++) {
+        //         resp[k]['business_name'] = review_b[k]['name']
+        //     }
+        //     setReviews(resp)
+        //     // console.log(reviews)
+        // })
+
+        return function cleanup() {
+            abortController.abort()
+          }
       }, [])
 
     return (
