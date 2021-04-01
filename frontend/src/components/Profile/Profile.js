@@ -11,7 +11,6 @@ import Rating from '@material-ui/lab/Rating';
 export function Profile() {
     const [username, setUser] = useState("");
     const [reviews, setReviews] = useState([])
-    const [review_businesses, setReviewBusinesses] = useState([])
 
     useEffect(() => {
         fetch("/test").then(res => {
@@ -52,7 +51,8 @@ export function Profile() {
                     console.log(res)
                   return res
                 }).then((business) => {
-                  setReviewBusinesses(business)
+                    console.log(business)
+                  let review_businesses = business
                   console.log(review_businesses)
                   for(let k = 0; k < res.length; k++) {
                         res[k]['business_name'] = review_businesses[k]['name']
