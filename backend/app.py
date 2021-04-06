@@ -376,10 +376,10 @@ def get_review():
         userid = db.session.query(Reviews).filter(Reviews.username == flask_praetorian.current_user().username).with_entities(Reviews.userid).first()
         if request.method == 'GET':
             revs = []
-            for review in db.session.query(Reviews).filter(Reviews.userid == userid).with_entities(Reviews.rating, Reviews.business_id, Reviews.text):
+            for review in db.session.query(Reviews).filter(Reviews.userid == userid).with_entities(Reviews.rating, Reviews.business_id, Reviews.text, Reviews.reviewid):
                 print(review)
-                rating, business_id, text = review
-                revs.append({'rating': rating, 'business_id': business_id, 'text': text})
+                rating, business_id, text, review_id = review
+                revs.append({'rating': rating, 'business_id': business_id, 'text': text, 'review_id': review_id})
             print(revs)
             #     revs.append(review.__dict__)
             # print(revs)
@@ -418,7 +418,20 @@ def getrecs():
     else:
         return {'Status': 'Failed'}
 
+@app.route("/api/delete_review", methods=['POST'])
+@flask_praetorian.auth_required
+def delete_review():
+    if request.method == 'POST':
+        userid = uid(flask_praetorian.current_user().username)
+        req = request.get_json(force=True)
+        review_id = req.get('review_id', None)
 
+        if db.session.query(Reviews).filter(Reviews.userid == userid, Reviews.reviewid == review_id).count() != 0:
+            db.session.delete(db.session.query(Reviews).filter(Reviews.userid == userid, Reviews.reviewid == review_id).first())
+            db.session.commit()
+            return {'Status': 'Success'}
+        else:
+            return {'Status': 'Failed'}
 
 
 

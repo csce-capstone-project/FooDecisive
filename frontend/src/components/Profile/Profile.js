@@ -3,17 +3,36 @@ import {authFetch} from "../../services/authentication";
 import './Profile.css';
 import Grid from '@material-ui/core/Grid';
 import Avatar from '@material-ui/core/Avatar';
-import { Typography, Box } from '@material-ui/core';
+import { Typography, Box, Button } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import { yelpBusID } from '../../services/yelp';
 import Rating from '@material-ui/lab/Rating';
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogContent from '@material-ui/core/DialogContent';
+import {ReviewDetail} from './ReviewDetail';
 
 export function Profile() {
     const [username, setUser] = useState("");
     const [reviews, setReviews] = useState([])
+    const [openConfirm, setOpenConfirm] = useState(false);
+
+    const fullWidth = true;
+
+    const handleClose = () => {
+        setOpenConfirm(false)
+    }
+
+    const handleOpenConfirm = () => {
+        setOpenConfirm(true)
+    }
+
+    function handleDeleteRev() {
+
+    }
 
     useEffect(() => {
         fetch("/test").then(res => {
@@ -97,7 +116,7 @@ export function Profile() {
                         <Grid container direction={'column'} spacing={0}>
                             {
                                 reviews.map(review => {
-                                    return <Grid container style={{ 'padding-top': '10px', 'padding-bottom': '10px'}} border={1}>
+                                    return <div>{/*<Grid container style={{ 'padding-top': '10px', 'padding-bottom': '10px'}} border={1}>
                                     <Grid item xs={11}>
                                         <Typography variant='h5' display="inline">{review.business_name}</Typography>
                                         <br></br>
@@ -113,13 +132,30 @@ export function Profile() {
                                             <DeleteIcon />
                                         </IconButton>
                                     </Grid>
-                                    </Grid>
+                                </Grid>*/}
+                                        <ReviewDetail review={review} key={review.business_id}/>
+                                    </div>;
                                 })
                             }
                         </Grid>
                     </Paper>
                 </Grid>
             </Grid>
+            {/*<Dialog
+                open={openConfirm}
+                onClose={handleClose}
+                aria-labelledby="business name"
+                fullWidth={fullWidth}
+                className='custom-modal-style'
+            >
+                <DialogTitle id='simple-dialog-title'>
+                    <Typography>Confirm review deletion</Typography>
+                </DialogTitle>
+                <DialogContent>
+                    <Button size='small' variant='contained' color='secondary'>YES</Button>
+                    <Button size='small' variant='outlined' color='secondary' onClick={handleClose}>NO</Button>
+                </DialogContent>
+            </Dialog>*/}
         </div>
     );
 }
