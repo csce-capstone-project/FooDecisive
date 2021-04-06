@@ -240,7 +240,10 @@ export function FavoritesDetail(props) {
                     Average rating: {props.business.rating}/5
                   </DialogContentText>
                   <DialogContentText>
-                    Genre: {props.business.category}
+                    Genre: {props.business.category} 
+                  </DialogContentText>
+                  <DialogContentText>
+                  Number of ratings: {props.business.reviewCount}
                   </DialogContentText>
                  </Grid>
                  <Grid item xs={6} justify-content='center'><img src={props.business.imageSrc} height='200px'/></Grid>

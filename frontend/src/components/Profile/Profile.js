@@ -14,6 +14,10 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import {ReviewDetail} from './ReviewDetail';
+import Fade from 'react-reveal/Fade';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
+
 
 export function Profile() {
     const [username, setUser] = useState("");
@@ -102,6 +106,7 @@ export function Profile() {
       }, [])
 
     return (
+        <Fade>
         <div className="Profile" style={{backgroundColor: 'Orange', height: '100%'}}>
             <Grid container spacing={0} style={{ color: 'white', backgroundColor: 'Orange' }}>
                 {/* <Grid item xs={12} style={{margin: 'auto'}}>
@@ -119,31 +124,18 @@ export function Profile() {
                 <Grid item xs={8} style={{'padding-top':'30px'}}>
                     <Paper style={{'border-style': 'double'}}>
                         <Typography variant='h3' style={{ 'padding-top': '10px', 'border-bottom-style':'solid'}}>Review History</Typography>
+                        {reviews.length != 0 ? 
                         <Grid container direction={'column'} spacing={0}>
                             {
                                 reviews.map(review => {
-                                    return <div>{/*<Grid container style={{ 'padding-top': '10px', 'padding-bottom': '10px'}} border={1}>
-                                    <Grid item xs={11}>
-                                        <Typography variant='h5' display="inline">{review.business_name}</Typography>
-                                        <br></br>
-                                        <Rating name="read-only" value={review.rating} readOnly />
-                                        <br></br>
-                                        <Typography variant='p' display="inline">"{review.text}"</Typography>
-                                    </Grid>
-                                    <Grid item xs={1}>
-                                        <IconButton>
-                                            <EditIcon />
-                                        </IconButton>
-                                        <IconButton>
-                                            <DeleteIcon />
-                                        </IconButton>
-                                    </Grid>
-                                </Grid>*/}
+                                    return <div>
                                         <ReviewDetail review={review} key={review.business_id}/>
                                     </div>;
                                 })
                             }
-                        </Grid>
+                        </Grid>:  
+                        <CircularProgress style={{color: 'orange'}}/>
+                    }
                     </Paper>
                 </Grid>
             </Grid>
@@ -163,5 +155,6 @@ export function Profile() {
                 </DialogContent>
             </Dialog>*/}
         </div>
+        </Fade>
     );
 }
