@@ -29,7 +29,7 @@ import {
 } from "../../Constants";
 import Context from "../../Context";
 
-const ICON_COLOR = "#4949e7";
+const ICON_COLOR = "Orange";
 const NO_LOCATION_MESSAGE =
   "Oh, I can't access your location. 📍 Please allow me to access it so I can help you.";
 const ICON_SIZE = 32;
@@ -102,7 +102,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
   },
   gridList: {
-    width: 1000,
+    width: 1100,
     height: 800,
   },
 }));
@@ -152,7 +152,7 @@ export const Chat = () => {
           .then(response => response)
           .then(data => {
             const resultsNew = data.results !== null ? data.results : [];
-            dispatch({ type: "SET_BOT_RESPONSE", payload: data.message });
+            dispatch({ type: "SET_BOT_RESPONSE", payload: data.message })
             setResults(resultsNew);
           })
           .catch(e => {
@@ -183,11 +183,21 @@ export const Chat = () => {
       let newBubbles = botResponse.map(b => ({
         type: BOT,
         bubbleType: b.type,
-        content: b.content
+        content: b.content,
+        gif: b.gif
       }));
       newBubbles.push(...filteredThinking(bubbles));
       dispatch({ type: "SET_BUBBLES", payload: newBubbles });
-      dispatch({ type: "SET_BOT_RESPONSE", payload: null });
+      if(newBubbles[0].bubbleType == "text"){
+        dispatch({ type: "SET_BOT_RESPONSE", payload: [{
+          type: "gif",
+          content:newBubbles[0].gif,
+          gif:[]
+        }]})
+      }
+      else{
+        dispatch({ type: "SET_BOT_RESPONSE", payload: null });
+      }
     }
   }, [botResponse]);
 

@@ -183,7 +183,7 @@ export function Detail(props) {
               />
               <CardContent>
                 <Typography gutterBottom variant="h2" component="h2">
-                  {props.business.name.slice(0, 22)}
+                  {props.business.name.slice(0, 17)}
                 </Typography>
                 <Typography gutterBottom variant="body2" component="p">
                   {props.business.address}
