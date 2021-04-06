@@ -16,6 +16,8 @@ import { witaiREST } from '../../services/witai';
 import { List } from '../RestaurantDetail/List';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
+import Fade from 'react-reveal/Fade';
+
 
 import logo from "../../assets/logo.png";
 import {
@@ -101,7 +103,7 @@ const useStyles = makeStyles((theme) => ({
   },
   gridList: {
     width: 1000,
-    height: 700,
+    height: 800,
   },
 }));
 
@@ -215,6 +217,7 @@ export const Chat = () => {
 
   const classes = useStyles();
   return (
+    <Fade>
     <div className="container">
       <div className="chat-container">
         <Header />
@@ -227,6 +230,7 @@ export const Chat = () => {
       </GridList>
       </div>
     </div>
+    </Fade>
   );
 };
 

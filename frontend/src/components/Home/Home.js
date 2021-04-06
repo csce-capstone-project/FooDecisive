@@ -177,7 +177,7 @@ export function Home() {
                 talk to Jesse!
                 </Typography>
                 {logged ? 
-                <Button variant="outlined" color="primary">
+                <Button variant="outlined" color="primary" onClick={() => {history.push('/chatbot')}}>
                 Talk to Jesse
                   </Button> :
                   <div></div>
@@ -246,7 +246,7 @@ export function Home() {
                   get recommendations personalized to you!
                 </Typography>
                 {logged ? 
-                <Button variant="outlined" color="primary">
+                <Button variant="outlined" color="primary" onClick={() => {history.push('/recs')}}>
                 Get your recommendations
                 </Button> :
                 <div></div>

@@ -8,6 +8,8 @@ import {RecsList} from './RecsList';
 import Typography from '@material-ui/core/Typography';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Container from "@material-ui/core/Container";
+import Fade from 'react-reveal/Fade';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -60,7 +62,9 @@ export function Recs() {
 
   return(
     <div>
-      {results.length != 0  ? <RecsList businesses={results} />
+      {results.length != 0  ? <Fade><Container><Typography variant="h2" align="center">
+          Your generated Recommendations!
+      </Typography><RecsList businesses={results} /></Container></Fade>
       : <Container style={{margin: '0 auto', position: 'absolute', top: '50%', left: '50%'}}>
         <CircularProgress style={{color: 'orange'}}/>
         </Container>}
