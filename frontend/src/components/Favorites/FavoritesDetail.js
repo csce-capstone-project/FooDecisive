@@ -178,8 +178,8 @@ export function FavoritesDetail(props) {
                 src={props.business.imageSrc}
               />
               <CardContent>
-                <Typography gutterBottom variant="h2" component="h2">
-                  {props.business.name}
+                <Typography gutterBottom variant="h2" component="h2" style={{paddingBottom: '10px'}}>
+                  {props.business.name.slice(0, 22)}
                 </Typography>
                 <Typography gutterBottom variant="body2" component="p">
                   {props.business.address}
