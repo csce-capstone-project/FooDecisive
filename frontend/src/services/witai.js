@@ -3,6 +3,7 @@ import { yelpREST } from './yelp';
 require('dotenv').config()
 const { REACT_APP_WIT_AI_API_KEY } = process.env;
 const responses = require('../responses.json');
+const gifs = require('../gif.json');
 
 const API_KEY = REACT_APP_WIT_AI_API_KEY
 
@@ -14,10 +15,10 @@ export const witaiREST = {
         }
       }).then(response=>response.json())
       .then(response => {
-        console.log(response)
         if(response.intents.length > 0){
           let intent = response.intents[0]['name']
-          let message = responses[intent]
+          let message = getMessage(intent)
+          let gif = getGif(intent)
           let sortBy = 'best_match'
           if(response.entities['sortBy:sortBy']){
             sortBy = response.entities['sortBy:sortBy'][0]['value'].toLowerCase()
@@ -38,7 +39,8 @@ export const witaiREST = {
                 return{
                   message:[{
                     type:"text",
-                    content:message
+                    content:message,
+                    gif:gif
                   }],
                   results:response
                 }
@@ -52,7 +54,8 @@ export const witaiREST = {
                 return{
                   message:[{
                     type:"text",
-                    content:message
+                    content:message,
+                    gif:gif
                   }],
                   results:response
                 }
@@ -63,7 +66,8 @@ export const witaiREST = {
             return{
               message:[{
                 type:"text",
-                content:message
+                content:message,
+                gif:gif
               }],
               results: []
             }
@@ -72,7 +76,8 @@ export const witaiREST = {
             return{
               message:[{
                 type:"text",
-                content:message
+                content:message,
+                gif:gif
               }],
               results: []
             }
@@ -81,7 +86,8 @@ export const witaiREST = {
             return{
               message:[{
                 type:"text",
-                content:message
+                content:message,
+                gif:gif
               }],
               results: []
             }
@@ -90,7 +96,8 @@ export const witaiREST = {
             return{
               message:[{
                 type:"text",
-                content:message
+                content:message,
+                gif:gif
               }],
               results: []
             }
@@ -99,3 +106,16 @@ export const witaiREST = {
       })
     }
 };
+
+const getMessage = (intent) =>{
+  return responses[intent][Math.floor(Math.random() * 3)]
+}
+
+const getGif = (intent) =>{
+  if(intent !== "example"){
+    return gifs[intent][Math.floor(Math.random() * 3)]
+  }
+  else{
+    return gifs[intent][0]
+  }
+}
