@@ -7,6 +7,9 @@ import { Typography, Box } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 import { yelpBusID } from '../../services/yelp';
 import Rating from '@material-ui/lab/Rating';
+import IconButton from '@material-ui/core/IconButton';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 export function Profile() {
     const [username, setUser] = useState("");
@@ -94,13 +97,23 @@ export function Profile() {
                         <Grid container direction={'column'} spacing={0}>
                             {
                                 reviews.map(review => {
-                                    return <Box style={{ 'padding-top': '10px', 'padding-bottom': '10px'}} border={1}>
+                                    return <Grid container style={{ 'padding-top': '10px', 'padding-bottom': '10px'}} border={1}>
+                                    <Grid item xs={11}>
                                         <Typography variant='h5' display="inline">{review.business_name}</Typography>
                                         <br></br>
                                         <Rating name="read-only" value={review.rating} readOnly />
                                         <br></br>
                                         <Typography variant='p' display="inline">"{review.text}"</Typography>
-                                    </Box>
+                                    </Grid>
+                                    <Grid item xs={1}>
+                                        <IconButton>
+                                            <EditIcon />
+                                        </IconButton>
+                                        <IconButton>
+                                            <DeleteIcon />
+                                        </IconButton>
+                                    </Grid>
+                                    </Grid>
                                 })
                             }
                         </Grid>
