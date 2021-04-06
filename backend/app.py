@@ -432,8 +432,28 @@ def delete_review():
             return {'Status': 'Success'}
         else:
             return {'Status': 'Failed'}
+    else:
+        return {'Status': 'Failed'}
 
+@app.route("/api/edit_review", methods=['POST'])
+@flask_praetorian.auth_required
+def edit_review():
+    if request.method == 'POST':
+        userid = uid(flask_praetorian.current_user().username)
+        req = request.get_json(force=True)
 
+        review_id = req.get('review_id', None)
+        rating = req.get('rating', None)
+        text = req.get('review', None)
+
+        if db.session.query(Reviews).filter(Reviews.userid == userid, Reviews.reviewid == review_id).count() != 0:
+            entry = db.session.query(Reviews).filter(Reviews.userid == userid, Reviews.reviewid == review_id).first()
+            entry.rating = rating
+            entry.text = text
+            db.session.commit()
+            return {'Status': 'Success'}
+        else:
+            return {'Status': 'Failed'}
 
 if __name__ == '__main__':
     app.debug = True

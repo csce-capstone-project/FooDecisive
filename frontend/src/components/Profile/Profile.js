@@ -78,6 +78,11 @@ export function Profile() {
                   console.log(review_businesses)
                   for(let k = 0; k < res.length; k++) {
                         res[k]['business_name'] = review_businesses[k]['name']
+                        res[k]['address'] = review_businesses[k]['address']
+                        res[k]['imageSrc'] = review_businesses[k]['imageSrc']
+                        res[k]['city'] = review_businesses[k]['city']
+                        res[k]['state'] = review_businesses[k]['state']
+                        res[k]['zipCode'] = review_businesses[k]['zipCode']
                     }
                     setReviews(res)
                 })
