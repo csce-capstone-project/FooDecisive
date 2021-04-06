@@ -14,15 +14,27 @@ export const witaiREST = {
         }
       }).then(response=>response.json())
       .then(response => {
+        console.log(response)
         if(response.intents.length > 0){
-          console.log(response)
           let intent = response.intents[0]['name']
           let message = responses[intent]
+          let sortBy = 'best_match'
+          if(response.entities['sortBy:sortBy']){
+            sortBy = response.entities['sortBy:sortBy'][0]['value'].toLowerCase()
+            let sortByOptions = {
+                'best match': 'best_match',
+                'highest rated': 'rating',
+                'most reviewed': 'review_count'
+            }
+            sortBy = sortByOptions[sortBy]
+          }
           if(intent == 'search'){
-            if(response.entities['wit$location:location']){
+            let query = response.entities['wit$search_query:search_query'][0]['value']
+            if(response.entities['wit$location:location'] && response.entities['wit$location:location'][0]['value'] != 'near me'){
               let location = response.entities['wit$location:location'][0]['value']
-              return yelpREST.search(response.entities['wit$search_query:search_query'][0]['value'],location,'best_match').then(response =>{
+              return yelpREST.search(query,location,sortBy).then(response =>{
                 message = message.replace('#',location)
+                message = message.replace('%',query)
                 return{
                   message:[{
                     type:"text",
@@ -31,6 +43,56 @@ export const witaiREST = {
                   results:response
                 }
               })
+            }
+            else{
+              let query = response.entities['wit$search_query:search_query'][0]['value']
+              return yelpREST.searchLatLon(query,userLocation.latitude,userLocation.longitude,sortBy).then(response =>{
+                message = "Showing % near you."
+                message = message.replace('%',query)
+                return{
+                  message:[{
+                    type:"text",
+                    content:message
+                  }],
+                  results:response
+                }
+              })
+            }
+          }
+          else if(intent == "example"){
+            return{
+              message:[{
+                type:"text",
+                content:message
+              }],
+              results: []
+            }
+          }
+          else if(intent == "goodbye"){
+            return{
+              message:[{
+                type:"text",
+                content:message
+              }],
+              results: []
+            }
+          }
+          else if(intent == "greeting"){
+            return{
+              message:[{
+                type:"text",
+                content:message
+              }],
+              results: []
+            }
+          }
+          else if(intent == "thanks"){
+            return{
+              message:[{
+                type:"text",
+                content:message
+              }],
+              results: []
             }
           }
         }
