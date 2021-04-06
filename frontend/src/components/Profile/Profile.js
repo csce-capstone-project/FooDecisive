@@ -51,7 +51,7 @@ export function Profile() {
                   bus.push(yelpBusID.searchByID(review_bus[j]))
                 }  
                 Promise.all(bus).then((res) => {
-                    console.log(res)
+                  console.log(res)
                   return res
                 }).then((business) => {
                     console.log(business)
