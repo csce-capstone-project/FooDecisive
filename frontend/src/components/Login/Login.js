@@ -4,6 +4,8 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import './Login.css'
 import {login, useAuth} from "../../services/authentication"
+import Container from "@material-ui/core/Container";
+import Fade from 'react-reveal/Fade';
 
 
 
@@ -14,7 +16,7 @@ export function Login() {
   const [logged] = useAuth();
 
   function validate(){
-    return username.length > 0 && password.length > 0;
+    return username.length > 0 && password.length >= 0;
   }
 
   const onSubmitClick = (e)=>{
@@ -52,9 +54,11 @@ export function Login() {
   }
 
   return (
-    <div className="Login">
+    
+    <Container style={{margin: '0', position: 'absolute', top: '30%', left: '40%', maxWidth: '500px'}}>
+      <Fade>
       {!logged ? <div>
-      <h2 className="log">Login</h2>
+      <h2>Login</h2>
       <Form onSubmit={onSubmitClick}>
           <Form.Group controlId="user">
             <Form.Label>Username</Form.Label>
@@ -64,12 +68,14 @@ export function Login() {
             <Form.Label>Password</Form.Label>
             <Form.Control type="password" placeholder="Password" value={password} onChange={handlePasswordChange} />
           </Form.Group>
-          <Button type="submit" disabled={!validate()}>
+          <Button type="submit" style={{backgroundColor: 'orange'}} disabled={!validate()}>
             Submit
           </Button>
       </Form>
       </div>:
       <Redirect to='/'/>}
-    </div>
+      </Fade>
+    </Container>
+    
   )
 }

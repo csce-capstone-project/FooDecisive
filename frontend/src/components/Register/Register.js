@@ -3,6 +3,9 @@ import { useHistory } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import './Register.css'
+import Container from "@material-ui/core/Container";
+
+import Fade from 'react-reveal/Fade';
 
 export function Register() {
   const [user, setUser] = useState("");
@@ -11,7 +14,7 @@ export function Register() {
   const history = useHistory();
 
   function validate(){
-    return user.length > 0 && pass.length > 0;
+    return user.length > 0 && pass.length >= 8;
   }
 
   function handleSubmit(event){
@@ -38,8 +41,9 @@ export function Register() {
   }
 
   return(
-    <div className="Register">
-      <h2 className="log">Register</h2>
+    <Container style={{margin: '0', position: 'absolute', top: '30%', left: '40%', maxWidth: '500px'}}>
+      <Fade>
+      <h2>Register</h2>
       <Form onSubmit={handleSubmit}>
           <Form.Group controlId="user">
             <Form.Label>Username</Form.Label>
@@ -47,12 +51,13 @@ export function Register() {
           </Form.Group>
           <Form.Group controlId="pass">
             <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" value={pass} onChange={(e) => setPass(e.target.value)} />
+            <Form.Control type="password" placeholder="8 characters, an uppercase, and a special character" value={pass} onChange={(e) => setPass(e.target.value)} />
           </Form.Group>
-          <Button type="submit" disabled={!validate()}>
+          <Button type="submit" style={{backgroundColor: 'orange'}} disabled={!validate()}>
             Submit
           </Button>
       </Form>
-    </div>
+      </Fade>
+    </Container>
   );
 }

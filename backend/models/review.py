@@ -5,7 +5,7 @@ class Reviews(db.Model):
     __tablename__ = 'reviews'
     col_id = db.Column(db.Integer, primary_key=True)
     reviewid = db.Column(db.String(200))
-    userid = db.Column(db.String(200))
+    userid = db.Column(db.Integer)
     business_id = db.Column(db.String(200))
     rating = db.Column(db.Integer)
     text = db.Column(db.Text())

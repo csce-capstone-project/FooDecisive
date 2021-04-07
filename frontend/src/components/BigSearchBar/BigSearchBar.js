@@ -6,6 +6,7 @@ import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import { Typography } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
+import Fade from 'react-reveal/Fade';
 
 import './BigSearchBar.css';
 import Map from '../RestaurantDetail/map'
@@ -120,6 +121,7 @@ export function BigSearchBar(props) {
 
 
   return (
+    <Fade>
     <div className="SearchBar">
       <div className="SearchBar-sort-options">
         <WhiteTextTypography variant="h2" align="center" id="myElement" gutterBottom>
@@ -140,6 +142,7 @@ export function BigSearchBar(props) {
       </div>
       </div>
     </div>
+    </Fade>
   );
 }
 

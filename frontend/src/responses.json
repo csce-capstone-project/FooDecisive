@@ -1,0 +1,27 @@
+{
+  "search":[
+    "Showing % in #.",
+    "No problem, showing % in #.",
+    "I searched everywhere I could, here's % in #."
+  ],
+  "example":[
+    "Try asking me: \"Show me restaurants in Fayetteville, AR.\"",
+    "You can ask me: \"What is the most reviewed restaurant near me?\"",
+    "I can search for restaurants for you. Try saying: \"Restaurants near me.\""
+  ],
+  "goodbye":[
+    "Bye for now!",
+    "It was a pleasure to help you, goodbye!",
+    "I hope to see you again soon!"
+  ],
+  "greeting":[
+    "Hello, I am Jesse, a restaurant recommender conversational chatbot.",
+    "Hello, how can I help you today?",
+    "Hello, I'm ready to help you!"
+  ],
+  "thanks":[
+    "My pleasure!",
+    "You're welcome! Need help with anything else?",
+    "No problem!"
+  ]
+}
