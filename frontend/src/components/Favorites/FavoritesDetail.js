@@ -18,7 +18,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import {authFetch, useAuth} from "../../services/authentication";
 import Form from "react-bootstrap/Form";
-import AddIcon from '@material-ui/icons/Add';
 import Map from '../RestaurantDetail/map'
 
 const useStyles = makeStyles((theme) => ({

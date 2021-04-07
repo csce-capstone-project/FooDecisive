@@ -19,7 +19,6 @@ import Grid from '@material-ui/core/Grid';
 import {authFetch, useAuth} from "../../services/authentication";
 import Form from "react-bootstrap/Form";
 import Map from './map'
-import AddIcon from '@material-ui/icons/Add';
 import Rating from '@material-ui/lab/Rating';
 import Slide from 'react-reveal/Slide';
 

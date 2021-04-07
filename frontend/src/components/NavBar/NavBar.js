@@ -8,7 +8,9 @@ import { deepOrange, deepPurple } from '@material-ui/core/colors';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import {Navbar, Nav, NavItem} from 'react-bootstrap';
+import {Navbar, Nav} from 'react-bootstrap';
+import FastfoodIcon from '@material-ui/icons/Fastfood';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -66,6 +68,7 @@ export function HomeNavBar() {
 
       return (
     <Navbar bg="dark" variant="dark" expand="lg" style={{width:'100%'}} className="topnav">
+    <FastfoodIcon style={{fontSize: '50px', color: 'Orange', paddingRight: '10px'}}/>
     <Navbar.Brand href="#home" style={{fontSize: '30px'}}>FooDecisive</Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">

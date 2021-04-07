@@ -142,7 +142,7 @@ def getMessage():
 
 
 # registration endpoint
-@app.route('/api/register', methods=["GET", "POST"])
+@app.route('/register', methods=["GET", "POST"])
 def register():
     if request.method == 'POST':
         request_data = json.loads(request.data)
@@ -172,7 +172,7 @@ def register():
 
 
 # login page
-@app.route('/api/login', methods=["GET", "POST"])
+@app.route('/login', methods=["GET", "POST"])
 def sign_in():
     if request.method == 'POST':
         req = request.get_json(force=True)
@@ -203,7 +203,7 @@ def sign_in():
         return {'status': 'NO USER FOUND'}
 
 
-@app.route('/api/refresh', methods=['POST'])
+@app.route('/refresh', methods=['POST'])
 def refresh():
     """
     Refreshes an existing JWT by creating a new one that is a copy of the old
@@ -220,7 +220,7 @@ def refresh():
 
 
 
-@app.route('/api/protected')
+@app.route('/protected')
 @flask_praetorian.auth_required
 def protected():
     """
@@ -234,7 +234,7 @@ def protected():
 
 
 # sign-out page
-@app.route('/api/logout', methods=["GET", "POST"])
+@app.route('/logout', methods=["GET", "POST"])
 def sign_out():
     if session.get('username') is not None:
         if request.method == 'POST':
@@ -247,7 +247,7 @@ def sign_out():
 
 
 
-@app.route('/api/rate', methods=["GET", "POST"])
+@app.route('/rate', methods=["GET", "POST"])
 @flask_praetorian.auth_required
 def post_rate():
     print(flask_praetorian.current_user().username)
@@ -295,7 +295,7 @@ def post_rate():
 
 
 
-@app.route('/api/get_favorites', methods=['GET', 'POST'])
+@app.route('/get_favorites', methods=['GET', 'POST'])
 @flask_praetorian.auth_required
 def get_favorites():
     if flask_praetorian.current_user().username is not None:
@@ -318,7 +318,7 @@ def get_favorites():
 
 
 
-@app.route('/api/favorites', methods=['GET', 'POST'])
+@app.route('/favorites', methods=['GET', 'POST'])
 @flask_praetorian.auth_required
 def favorite():
     if flask_praetorian.current_user().username is not None:
@@ -369,24 +369,24 @@ def favorite():
     else:
         return {'Status': 'Failed'}
 
-@app.route('/api/get_reviews', methods=['GET', 'POST'])
+@app.route('/get_reviews', methods=['GET', 'POST'])
 @flask_praetorian.auth_required
 def get_review():
     if flask_praetorian.current_user().username is not None:
         userid = db.session.query(Reviews).filter(Reviews.username == flask_praetorian.current_user().username).with_entities(Reviews.userid).first()
         if request.method == 'GET':
             revs = []
-            for review in db.session.query(Reviews).filter(Reviews.userid == userid).with_entities(Reviews.rating, Reviews.business_id, Reviews.text, Reviews.reviewid):
+            for review in db.session.query(Reviews).filter(Reviews.userid == userid).with_entities(Reviews.rating, Reviews.business_id, Reviews.text):
                 print(review)
-                rating, business_id, text, review_id = review
-                revs.append({'rating': rating, 'business_id': business_id, 'text': text, 'review_id': review_id})
+                rating, business_id, text = review
+                revs.append({'rating': rating, 'business_id': business_id, 'text': text})
             print(revs)
             #     revs.append(review.__dict__)
             # print(revs)
             # print(json.dumps(revs))
             return jsonify(revs)
 
-@app.route("/api/recs", methods=['GET'])
+@app.route("/recs", methods=['GET'])
 @flask_praetorian.auth_required
 def getrecs():
     if request.method == 'GET':
@@ -418,46 +418,13 @@ def getrecs():
     else:
         return {'Status': 'Failed'}
 
-@app.route("/api/delete_review", methods=['POST'])
-@flask_praetorian.auth_required
-def delete_review():
-    if request.method == 'POST':
-        userid = uid(flask_praetorian.current_user().username)
-        req = request.get_json(force=True)
-        review_id = req.get('review_id', None)
 
-        if db.session.query(Reviews).filter(Reviews.userid == userid, Reviews.reviewid == review_id).count() != 0:
-            db.session.delete(db.session.query(Reviews).filter(Reviews.userid == userid, Reviews.reviewid == review_id).first())
-            db.session.commit()
-            return {'Status': 'Success'}
-        else:
-            return {'Status': 'Failed'}
-    else:
-        return {'Status': 'Failed'}
 
-@app.route("/api/edit_review", methods=['POST'])
-@flask_praetorian.auth_required
-def edit_review():
-    if request.method == 'POST':
-        userid = uid(flask_praetorian.current_user().username)
-        req = request.get_json(force=True)
 
-        review_id = req.get('review_id', None)
-        rating = req.get('rating', None)
-        text = req.get('review', None)
-
-        if db.session.query(Reviews).filter(Reviews.userid == userid, Reviews.reviewid == review_id).count() != 0:
-            entry = db.session.query(Reviews).filter(Reviews.userid == userid, Reviews.reviewid == review_id).first()
-            entry.rating = rating
-            entry.text = text
-            db.session.commit()
-            return {'Status': 'Success'}
-        else:
-            return {'Status': 'Failed'}
 
 if __name__ == '__main__':
     app.debug = True
     # app.permanent_session_lifetime = timedelta(minutes=1)
-    app.run(host='0.0.0.0', port=5000)
+    app.run()
 
 

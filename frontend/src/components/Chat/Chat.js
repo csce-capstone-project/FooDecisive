@@ -15,11 +15,9 @@ import Bubble from "../Bubble";
 import { witaiREST } from '../../services/witai';
 import { List } from '../RestaurantDetail/List';
 import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
 import Fade from 'react-reveal/Fade';
+import FastfoodIcon from '@material-ui/icons/Fastfood';
 
-
-import logo from "../../assets/logo.png";
 import {
   BOT,
   USER,
@@ -76,10 +74,11 @@ const callApi = (input, userLocation) => {
 
 // memoizing the two presentational components
 const Header = memo(() => (
-  <div className="header-chat">
+  <div className="header-chat" style={{margin: 'auto'}}>
     {/* <img src={logo} alt="Loa" className="header-logo" /> */}
-    <i class='fas fa-hamburger' style={{fontSize:'48px', paddingRight:'30px', color:'orange'}}></i>
-    <p className="header-chat-text">Jessie</p>
+    {/* <i class='fas fa-hamburger' style={{fontSize:'48px', paddingRight:'30px', color:'orange'}}></i> */}
+    <FastfoodIcon style={{fontSize: '50px', color: 'Orange'}}/>
+    <p className="header-chat-text" style={{padding: '10px'}}>Jessie</p>
   </div>
 ));
 

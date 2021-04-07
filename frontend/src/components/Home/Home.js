@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
-import { Typography, Paper, Grid, requirePropFactory } from '@material-ui/core';
+import { Typography, Grid } from '@material-ui/core';
 import {authFetch, useAuth} from "../../services/authentication"
 import Container from "@material-ui/core/Container";
 import CardMedia from "@material-ui/core/CardMedia";
-import { spacing } from '@material-ui/system';
-import CardContent from '@material-ui/core/CardContent';
-import { shadows } from '@material-ui/system';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import SearchImage from '../Home/photo/search.png';
 import RateImage from '../Home/photo/rate.png';
 import Chatbot from '../Home/photo/Chatbot.png';
@@ -18,6 +14,8 @@ import { useHistory } from "react-router-dom";
 import Fade from 'react-reveal/Fade';
 import Zoom from 'react-reveal/Zoom';
 import Bounce from 'react-reveal/Bounce';
+import FastfoodIcon from '@material-ui/icons/Fastfood';
+
 
 const useStyles = makeStyles((theme) => ({
     about: {
@@ -86,17 +84,19 @@ export function Home() {
             </header> */}
             {logged ? 
                <Box style={{backgroundColor: 'Orange', paddingBottom: '100px'}} boxShadow={4}>
+                 <Zoom>
                  <Container style={{paddingTop: '100px'}}>
                 <Typography variant="h2" align="center" gutterBottom>
                 Welcome to FooDecisive, {username}!
                 </Typography>
                 </Container>
+                </Zoom>
                 </Box> :
                 
                 <Box style={{backgroundColor: 'Orange', paddingBottom: '100px'}} boxShadow={4}>
                   <Container style={{paddingTop: '100px'}}>
                 <Typography variant="h2" align="center" gutterBottom>
-                Welcome to FooDecisive!
+                <Zoom>Welcome to FooDecisive!</Zoom>
                 </Typography>
                 </Container>
                 </Box> 
@@ -110,7 +110,8 @@ export function Home() {
                 <Typography variant="body3" align="left">
                 Thanks for stopping by! FooDecisive is a user-centric platform that was designed to give users the best experience possible in helping them
                 choose where to eat! Check out all the services we offer below!
-                </Typography>
+                </Typography> <br></br>
+                <FastfoodIcon style={{fontSize: '160px', color: 'Orange', margin: 'auto', width: '100%', padding:'10px'}}/>
                 {!logged ? 
                 <Container maxWidth="md" align="center" style={{paddingTop: '50px'}}>
                 <Button variant="contained" style={{backgroundColor: "Orange", marginRight: '5%'}} onClick={() => {history.push('/login')}}>
