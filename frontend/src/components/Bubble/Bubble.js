@@ -3,9 +3,9 @@ import "./Bubble.css";
 
 import { USER, THINKING } from "../../Constants";
 
-const USER_BUBBLE_COLOR = "#4949e7";
+const USER_BUBBLE_COLOR = "Orange";
 const BOT_BUBBLE_COLOR = "#f2f2f2";
-const USER_INK_COLOR = "#fff";
+const USER_INK_COLOR = "#000";
 const BOT_INK_COLOR = "#000";
 
 const TEXT_BUBBLE_STYLES = (type, content) => ({

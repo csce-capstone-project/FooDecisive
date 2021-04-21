@@ -16,6 +16,8 @@ import { witaiREST } from '../../services/witai';
 import { List } from '../RestaurantDetail/List';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
+import Fade from 'react-reveal/Fade';
+
 
 import logo from "../../assets/logo.png";
 import {
@@ -27,7 +29,7 @@ import {
 } from "../../Constants";
 import Context from "../../Context";
 
-const ICON_COLOR = "#4949e7";
+const ICON_COLOR = "Orange";
 const NO_LOCATION_MESSAGE =
   "Oh, I can't access your location. 📍 Please allow me to access it so I can help you.";
 const ICON_SIZE = 32;
@@ -100,8 +102,8 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
   },
   gridList: {
-    width: 1000,
-    height: 700,
+    width: 1100,
+    height: '100% !important',
   },
 }));
 
@@ -226,6 +228,7 @@ export const Chat = () => {
 
   const classes = useStyles();
   return (
+    <Fade>
     <div className="container">
       <div className="chat-container">
         <Header />
@@ -238,6 +241,7 @@ export const Chat = () => {
       </GridList>
       </div>
     </div>
+    </Fade>
   );
 };
 

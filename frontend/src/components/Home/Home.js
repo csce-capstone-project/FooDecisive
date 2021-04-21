@@ -13,6 +13,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import SearchImage from '../Home/photo/search.png';
 import RateImage from '../Home/photo/rate.png';
 import Chatbot from '../Home/photo/Chatbot.png';
+import Recommender from '../Home/photo/ML.png';
 import { useHistory } from "react-router-dom";
 import Fade from 'react-reveal/Fade';
 import Zoom from 'react-reveal/Zoom';
@@ -177,7 +178,7 @@ export function Home() {
                 talk to Jesse!
                 </Typography>
                 {logged ? 
-                <Button variant="outlined" color="primary">
+                <Button variant="outlined" color="primary" onClick={() => {history.push('/chatbot')}}>
                 Talk to Jesse
                   </Button> :
                   <div></div>
@@ -230,7 +231,7 @@ export function Home() {
                 className={classes.media}
                 component='img'
                 height='350'
-                //image= {searchImage}
+                image= {Recommender}
               /></Box>
               </Bounce>
             </Grid>
@@ -246,7 +247,7 @@ export function Home() {
                   get recommendations personalized to you!
                 </Typography>
                 {logged ? 
-                <Button variant="outlined" color="primary">
+                <Button variant="outlined" color="primary" onClick={() => {history.push('/recs')}}>
                 Get your recommendations
                 </Button> :
                 <div></div>

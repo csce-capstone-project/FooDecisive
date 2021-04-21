@@ -1,21 +1,22 @@
 html, body, #root, .app, .full-container {
-  height: 90% !important;
+  height: 100% !important;
   width: 100% !important;
   margin: 0px !important;
   padding: 0px !important;
 }
 
 .container{
-  height: 150% !important;
+  height: 100% !important;
   width: 100% !important;
   max-width: 100% !important;
-  margin: 0 0 0 0 !important;
-  padding: 0px 0 0 0 !important;
+  margin: -84px 0 0 0 !important;
+  padding: 84px 0 0 0 !important;
 }
 
 .list-container{
   float:left;
   width:70%;
+  height: 100% !important;
 }
 
 .chat-container {
@@ -30,6 +31,7 @@ html, body, #root, .app, .full-container {
   z-index: 1;
   position: relative;
 }
+
 
 .header-chat {
   width: 100%;
@@ -51,7 +53,6 @@ html, body, #root, .app, .full-container {
   font-size: 18px;
   color: black;
   font-weight: bold;
-  font-family: "Lato";
 }
 
 .bubbles-container {
@@ -104,7 +105,6 @@ html, body, #root, .app, .full-container {
   margin-left: 10px;
   background-color: #f2f2f2;
   outline: none;
-  font-family: "Lato";
   color: black;
   font-size: 16px;
   z-index: 2;
