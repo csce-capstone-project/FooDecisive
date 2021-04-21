@@ -1,8 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {authFetch} from "../../services/authentication";
-import AddIcon from '@material-ui/icons/Add';
-import Pagination from '@material-ui/lab/Pagination';
 import { yelpBusID } from '../../services/yelp';
 import {RecsList} from './RecsList';
 import Typography from '@material-ui/core/Typography';

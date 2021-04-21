@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
-import { Typography, Paper, Grid, requirePropFactory } from '@material-ui/core';
+import { Typography, Grid } from '@material-ui/core';
 import {authFetch, useAuth} from "../../services/authentication"
 import Container from "@material-ui/core/Container";
 import CardMedia from "@material-ui/core/CardMedia";
-import { spacing } from '@material-ui/system';
-import CardContent from '@material-ui/core/CardContent';
-import { shadows } from '@material-ui/system';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import SearchImage from '../Home/photo/search.png';
 import RateImage from '../Home/photo/rate.png';
 import Chatbot from '../Home/photo/Chatbot.png';
@@ -126,7 +122,7 @@ export function Home() {
               <Zoom>
               <Container maxWidth="md">
               <Typography variant="h4" gutterBottom>
-                Quick search for restautants
+                Quick search for restaurants
                 </Typography>
                 <Typography variant="body1" paragraph="True" gutterBottom>
                 Search for any restaurant filtered by best match, high rated, or most reviewed! Effectively provides top 20 search results in a specified location or from users' current location.
