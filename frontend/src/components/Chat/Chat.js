@@ -117,7 +117,7 @@ export const Chat = () => {
   // this ref will contain the message from the user
   const messageRef = useRef("");
   // get location and restaurants setter from Context
-  const { userLocation, setRestaurants } = useContext(Context);
+  const { userLocation } = useContext(Context);
 
   const handleSend = () => {
     dispatch({
@@ -149,25 +149,26 @@ export const Chat = () => {
         const input = inputValue.substr(0, inputValue.length - 1); // Remove '\n' caracter at the end
         // fetch restaurants
         callApi(input, userLocation)
-          .then(response => response)
           .then(data => {
             const resultsNew = data.results !== null ? data.results : [];
+            console.log(resultsNew)
             dispatch({ type: "SET_BOT_RESPONSE", payload: data.message })
-            setResults(resultsNew);
+            if(resultsNew.length > 0){
+              setResults(resultsNew);
+            }
           })
           .catch(e => {
             console.log(e);
             dispatch({ type: "SET_BOT_RESPONSE", payload: ERROR_BUBBLES });
-            setRestaurants([]);
           });
       } else {
         dispatch({
           type: "SET_BOT_RESPONSE",
-          payload: [{ type: "text", content: NO_LOCATION_MESSAGE }]
+          payload: [{ type: "text", content: NO_LOCATION_MESSAGE, gif: "https://media1.tenor.com/images/c0d560233d7a70f5d5c1e2af77796602/tenor.gif?itemid=8761319" }]
         });
       }
     }
-  }, [userLocation, dispatch, setRestaurants, messageRef]);
+  }, [userLocation, dispatch, messageRef]);
 
   useEffect(() => {
     if (bubbles.length > 1) {
