@@ -14,7 +14,8 @@ const ERROR_BUBBLES = [
   {
     type: "text",
     content:
-      "Uuuh, something went wrong behind the scenes... 🙄, try refreshing the page !"
+      "Uuuh, something went wrong behind the scenes... 🙄, try refreshing the page!",
+    gif: "https://media1.tenor.com/images/c0d560233d7a70f5d5c1e2af77796602/tenor.gif?itemid=8761319"
   }
 ];
 
