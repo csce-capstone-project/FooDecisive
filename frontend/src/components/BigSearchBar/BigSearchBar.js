@@ -56,7 +56,7 @@ export function BigSearchBar(props) {
         .then((responseJson) => {
             console.log('ADDRESS GEOCODE' + JSON.stringify(responseJson.results[0].formatted_address))
 
-            setLocation(JSON.stringify(responseJson.results[0].formatted_address));
+            return(JSON.stringify(responseJson.results[0].formatted_address));
           })
           
       },
@@ -64,7 +64,11 @@ export function BigSearchBar(props) {
       function (error) {
         console.error("Error Code = " + error.code + " - " + error.message);
       }
-    );
+    ).then((res) => {
+      props.searchYelp(term, res, sortBy);
+    });
+
+
   };
   
 

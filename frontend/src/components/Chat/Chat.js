@@ -15,7 +15,6 @@ import Bubble from "../Bubble";
 import { witaiREST } from '../../services/witai';
 import { List } from '../RestaurantDetail/List';
 import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
 import Fade from 'react-reveal/Fade';
 
 
